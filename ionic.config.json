@@ -1,0 +1,7 @@
+{
+  "name": "DigiSkool",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
