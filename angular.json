@@ -31,6 +31,11 @@
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/styles"
+              ]
+            },
             "scripts": [],
             "aot": false,
             "vendorChunk": true,

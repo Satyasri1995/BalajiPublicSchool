@@ -1,0 +1,62 @@
+
+<ion-content>
+  <ion-row class="ion-align-items-center ion-justify-content-center fill">
+    <ion-col sizeMd="4" offsetMd="4" sizeSm="12">
+      <ion-card sizeSm="12" sizeMd="">
+        <ion-card-header>
+          <ion-card-title color="tertiary">
+            Sign-In/Sign-Up
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="isSignIn">
+          <form>
+            <ion-item>
+              <ion-label position="floating">E-Mail</ion-label>
+              <ion-input type="mail"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password"></ion-input>
+            </ion-item>
+            <ion-button fill="outline" class="ion-margin-top" (click)="doSignIn()">
+              <ion-label>Sign-In</ion-label>
+            </ion-button>
+          </form>
+          <ion-row class="ion-justify-content-end">
+            <ion-button class="ion-no-padding" fill="clear" (click)="toggleSignIn()">
+              <ion-label class="ion-text-capitalize">Don't have an account yet?</ion-label>
+            </ion-button>
+          </ion-row>
+        </ion-card-content>
+        <ion-card-content *ngIf="!isSignIn">
+          <form>
+            <ion-item>
+              <ion-label position="floating">E-Mail</ion-label>
+              <ion-input type="mail"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Confirm Password</ion-label>
+              <ion-input type="password"></ion-input>
+            </ion-item>
+            <ion-button fill="outline" class="ion-margin-top">
+              <ion-label>Sign-Up</ion-label>
+            </ion-button>
+          </form>
+          <ion-row class="ion-justify-content-end">
+            <ion-button class="ion-no-padding" fill="clear" (click)="toggleSignIn()">
+              <ion-label class="ion-text-capitalize">Already have an account?</ion-label>
+            </ion-button>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
