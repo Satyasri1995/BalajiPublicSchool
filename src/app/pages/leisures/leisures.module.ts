@@ -1,3 +1,4 @@
+import { RankPipe } from './../../pipes/rank.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,6 @@ import { LeisuresPage } from './leisures.page';
     IonicModule,
     LeisuresPageRoutingModule
   ],
-  declarations: [LeisuresPage]
+  declarations: [LeisuresPage,RankPipe]
 })
 export class LeisuresPageModule {}

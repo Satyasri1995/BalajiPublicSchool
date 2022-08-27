@@ -14,7 +14,7 @@ export class ScheduleItemListComponent implements OnInit {
     this.mySchedule = [
       new Schedule({
         id: Math.random().toString(),
-        period: 1,
+        period: '1st Period',
         day: 1,
         class: '7th Class',
         subject: 'English',

@@ -6,114 +6,105 @@
 </ion-header>
 
 <ion-content>
-  <ion-row class="ion-justify-content-center ion-align-items-center fill">
+  <ion-row class="ion-justify-content-center fill">
     <ion-col sizeSm="12" sizeMd="4">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title color="tertiary">
-            Create/Update Schedule
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form>
-            <ion-item>
-              <ion-label position="floating">Day</ion-label>
-              <ion-select placeholder="Select Day">
-                <ion-select-option [value]="1">Monday</ion-select-option>
-                <ion-select-option [value]="2">Tuesday</ion-select-option>
-                <ion-select-option [value]="3">Wednesday</ion-select-option>
-                <ion-select-option [value]="4">Thursday</ion-select-option>
-                <ion-select-option [value]="5">Friday</ion-select-option>
-                <ion-select-option [value]="6">Saturday</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Class</ion-label>
-              <ion-select placeholder="Select Class">
-                <ion-select-option [value]="'Nursery'">Nursery</ion-select-option>
-                <ion-select-option [value]="'LKG'">LKG</ion-select-option>
-                <ion-select-option [value]="'UKG'">UKG</ion-select-option>
-                <ion-select-option [value]="'1ˢᵗ Class'">1ˢᵗ Class</ion-select-option>
-                <ion-select-option [value]="'2ⁿᵈ Class'">2ⁿᵈ Class</ion-select-option>
-                <ion-select-option [value]="'3ʳᵈ Class'">3ʳᵈ Class</ion-select-option>
-                <ion-select-option [value]="'4ᵗʰ Class'">4ᵗʰ Class</ion-select-option>
-                <ion-select-option [value]="'5ᵗʰ Class'">5ᵗʰ Class</ion-select-option>
-                <ion-select-option [value]="'6ᵗʰ Class'">6ᵗʰ Class</ion-select-option>
-                <ion-select-option [value]="'7ᵗʰ Class'">7ᵗʰ Class</ion-select-option>
-                <ion-select-option [value]="'8ᵗʰ Class'">8ᵗʰ Class</ion-select-option>
-                <ion-select-option [value]="'9ᵗʰ Class'">9ᵗʰ Class</ion-select-option>
-                <ion-select-option [value]="'10ᵗʰ Class'">10ᵗʰ Class</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Section</ion-label>
-              <ion-select placeholder="Select Section">
-                <ion-select-option [value]="'A'">A</ion-select-option>
-                <ion-select-option [value]="'B'">B</ion-select-option>
-                <ion-select-option [value]="'C'">C</ion-select-option>
-                <ion-select-option [value]="'D'">D</ion-select-option>
-                <ion-select-option [value]="'E'">E</ion-select-option>
-                <ion-select-option [value]="'F'">F</ion-select-option>
-                <ion-select-option [value]="'G'">G</ion-select-option>
-                <ion-select-option [value]="'H'">H</ion-select-option>
-                <ion-select-option [value]="'I'">I</ion-select-option>
-                <ion-select-option [value]="'J'">J</ion-select-option>
-                <ion-select-option [value]="'K'">K</ion-select-option>
-                <ion-select-option [value]="'L'">L</ion-select-option>
-                <ion-select-option [value]="'M'">M</ion-select-option>
-                <ion-select-option [value]="'N'">N</ion-select-option>
-                <ion-select-option [value]="'O'">O</ion-select-option>
-                <ion-select-option [value]="'P'">P</ion-select-option>
-                <ion-select-option [value]="'Q'">Q</ion-select-option>
-                <ion-select-option [value]="'R'">R</ion-select-option>
-                <ion-select-option [value]="'S'">S</ion-select-option>
-                <ion-select-option [value]="'T'">T</ion-select-option>
-                <ion-select-option [value]="'U'">U</ion-select-option>
-                <ion-select-option [value]="'V'">V</ion-select-option>
-                <ion-select-option [value]="'W'">W</ion-select-option>
-                <ion-select-option [value]="'X'">X</ion-select-option>
-                <ion-select-option [value]="'Y'">Y</ion-select-option>
-                <ion-select-option [value]="'Z'">Z</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Period</ion-label>
-              <ion-select placeholder="Select Period">
-                <ion-select-option [value]="'1ˢᵗ Period'">1ˢᵗ Period</ion-select-option>
-                <ion-select-option [value]="'2ⁿᵈ Period'">2ⁿᵈ Period</ion-select-option>
-                <ion-select-option [value]="'3ʳᵈ Period'">3ʳᵈ Period</ion-select-option>
-                <ion-select-option [value]="'4ᵗʰ Period'">4ᵗʰ Period</ion-select-option>
-                <ion-select-option [value]="'5ᵗʰ Period'">5ᵗʰ Period</ion-select-option>
-                <ion-select-option [value]="'6ᵗʰ Period'">6ᵗʰ Period</ion-select-option>
-                <ion-select-option [value]="'7ᵗʰ Period'">7ᵗʰ Period</ion-select-option>
-                <ion-select-option [value]="'8ᵗʰ Period'">8ᵗʰ Period</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Subject</ion-label>
-              <ion-select placeholder="Select Subject">
-                <ion-select-option [value]="'Telugu'">Telugu</ion-select-option>
-                <ion-select-option [value]="'Sanskrit'">Sanskrit</ion-select-option>
-                <ion-select-option [value]="'Hindi'">Hindi</ion-select-option>
-                <ion-select-option [value]="'English'">English</ion-select-option>
-                <ion-select-option [value]="'Mathematics'">Mathematics</ion-select-option>
-                <ion-select-option [value]="'Physical Science'">Science</ion-select-option>
-                <ion-select-option [value]="'Natural Science'">Science</ion-select-option>
-                <ion-select-option [value]="'Computer Science'">Computer Science</ion-select-option>
-                <ion-select-option [value]="'Social'">Social</ion-select-option>
-                <ion-select-option [value]="'General Knowledge'">General Knowledge</ion-select-option>
-                <ion-select-option [value]="'Physical Training'">Physical Training</ion-select-option>
-                <ion-select-option [value]="'Abacus'">Abacus</ion-select-option>
-                <ion-select-option [value]="'Geeta'">Geeta</ion-select-option>
-                <ion-select-option [value]="'MPT'">MPT</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-button class="ion-margin-top" fill="outline" color="primary">
-              <ion-label>Save</ion-label>
-            </ion-button>
-          </form>
-        </ion-card-content>
-      </ion-card>
+      <form class="ion-padding">
+        <ion-item>
+          <ion-label position="floating">Day</ion-label>
+          <ion-select placeholder="Select Day">
+            <ion-select-option [value]="1">Monday</ion-select-option>
+            <ion-select-option [value]="2">Tuesday</ion-select-option>
+            <ion-select-option [value]="3">Wednesday</ion-select-option>
+            <ion-select-option [value]="4">Thursday</ion-select-option>
+            <ion-select-option [value]="5">Friday</ion-select-option>
+            <ion-select-option [value]="6">Saturday</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Class</ion-label>
+          <ion-select placeholder="Select Class">
+            <ion-select-option [value]="'Nursery'">Nursery</ion-select-option>
+            <ion-select-option [value]="'LKG'">LKG</ion-select-option>
+            <ion-select-option [value]="'UKG'">UKG</ion-select-option>
+            <ion-select-option [value]="'1ˢᵗ Class'">1ˢᵗ Class</ion-select-option>
+            <ion-select-option [value]="'2ⁿᵈ Class'">2ⁿᵈ Class</ion-select-option>
+            <ion-select-option [value]="'3ʳᵈ Class'">3ʳᵈ Class</ion-select-option>
+            <ion-select-option [value]="'4ᵗʰ Class'">4ᵗʰ Class</ion-select-option>
+            <ion-select-option [value]="'5ᵗʰ Class'">5ᵗʰ Class</ion-select-option>
+            <ion-select-option [value]="'6ᵗʰ Class'">6ᵗʰ Class</ion-select-option>
+            <ion-select-option [value]="'7ᵗʰ Class'">7ᵗʰ Class</ion-select-option>
+            <ion-select-option [value]="'8ᵗʰ Class'">8ᵗʰ Class</ion-select-option>
+            <ion-select-option [value]="'9ᵗʰ Class'">9ᵗʰ Class</ion-select-option>
+            <ion-select-option [value]="'10ᵗʰ Class'">10ᵗʰ Class</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Section</ion-label>
+          <ion-select placeholder="Select Section">
+            <ion-select-option [value]="'A'">A</ion-select-option>
+            <ion-select-option [value]="'B'">B</ion-select-option>
+            <ion-select-option [value]="'C'">C</ion-select-option>
+            <ion-select-option [value]="'D'">D</ion-select-option>
+            <ion-select-option [value]="'E'">E</ion-select-option>
+            <ion-select-option [value]="'F'">F</ion-select-option>
+            <ion-select-option [value]="'G'">G</ion-select-option>
+            <ion-select-option [value]="'H'">H</ion-select-option>
+            <ion-select-option [value]="'I'">I</ion-select-option>
+            <ion-select-option [value]="'J'">J</ion-select-option>
+            <ion-select-option [value]="'K'">K</ion-select-option>
+            <ion-select-option [value]="'L'">L</ion-select-option>
+            <ion-select-option [value]="'M'">M</ion-select-option>
+            <ion-select-option [value]="'N'">N</ion-select-option>
+            <ion-select-option [value]="'O'">O</ion-select-option>
+            <ion-select-option [value]="'P'">P</ion-select-option>
+            <ion-select-option [value]="'Q'">Q</ion-select-option>
+            <ion-select-option [value]="'R'">R</ion-select-option>
+            <ion-select-option [value]="'S'">S</ion-select-option>
+            <ion-select-option [value]="'T'">T</ion-select-option>
+            <ion-select-option [value]="'U'">U</ion-select-option>
+            <ion-select-option [value]="'V'">V</ion-select-option>
+            <ion-select-option [value]="'W'">W</ion-select-option>
+            <ion-select-option [value]="'X'">X</ion-select-option>
+            <ion-select-option [value]="'Y'">Y</ion-select-option>
+            <ion-select-option [value]="'Z'">Z</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Period</ion-label>
+          <ion-select placeholder="Select Period">
+            <ion-select-option [value]="'1ˢᵗ Period'">1ˢᵗ Period</ion-select-option>
+            <ion-select-option [value]="'2ⁿᵈ Period'">2ⁿᵈ Period</ion-select-option>
+            <ion-select-option [value]="'3ʳᵈ Period'">3ʳᵈ Period</ion-select-option>
+            <ion-select-option [value]="'4ᵗʰ Period'">4ᵗʰ Period</ion-select-option>
+            <ion-select-option [value]="'5ᵗʰ Period'">5ᵗʰ Period</ion-select-option>
+            <ion-select-option [value]="'6ᵗʰ Period'">6ᵗʰ Period</ion-select-option>
+            <ion-select-option [value]="'7ᵗʰ Period'">7ᵗʰ Period</ion-select-option>
+            <ion-select-option [value]="'8ᵗʰ Period'">8ᵗʰ Period</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Subject</ion-label>
+          <ion-select placeholder="Select Subject">
+            <ion-select-option [value]="'Telugu'">Telugu</ion-select-option>
+            <ion-select-option [value]="'Sanskrit'">Sanskrit</ion-select-option>
+            <ion-select-option [value]="'Hindi'">Hindi</ion-select-option>
+            <ion-select-option [value]="'English'">English</ion-select-option>
+            <ion-select-option [value]="'Mathematics'">Mathematics</ion-select-option>
+            <ion-select-option [value]="'Physical Science'">Science</ion-select-option>
+            <ion-select-option [value]="'Natural Science'">Science</ion-select-option>
+            <ion-select-option [value]="'Computer Science'">Computer Science</ion-select-option>
+            <ion-select-option [value]="'Social'">Social</ion-select-option>
+            <ion-select-option [value]="'General Knowledge'">General Knowledge</ion-select-option>
+            <ion-select-option [value]="'Physical Training'">Physical Training</ion-select-option>
+            <ion-select-option [value]="'Abacus'">Abacus</ion-select-option>
+            <ion-select-option [value]="'Geeta'">Geeta</ion-select-option>
+            <ion-select-option [value]="'MPT'">MPT</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button class="ion-margin-top" fill="outline" color="primary">
+          <ion-label>Save</ion-label>
+        </ion-button>
+      </form>
     </ion-col>
   </ion-row>
 </ion-content>

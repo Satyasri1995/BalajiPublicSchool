@@ -1,9 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>leisures</ion-title>
+  <ion-toolbar color="primary">
+    <ion-back-button slot="start" defaultHref="/profile"></ion-back-button>
+    <ion-title>Leisures</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-row class="ion-justify-content-center fill">
+    <ion-col sizeSm="12" sizeMd="4" class="ion-no-padding ion-no-margin">
+      <ion-accordion-group>
+        <ion-accordion *ngFor="let leisure of leisures" [value]="leisure.name">
+          <ion-item slot="header">
+            <ion-label>{{leisure.name}}</ion-label>
+          </ion-item>
+          <div class="ion-no-padding ion-padding-horizontal" slot="content">
+            <ion-list class="ion-no-padding">
+              <ion-item *ngFor="let schedule of leisure.schedules" class="list_item ion-no-margin ion-no-padding">
+                <ion-label>{{schedule.period}}</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-col>
+  </ion-row>
 </ion-content>
