@@ -10,18 +10,18 @@ export class UserPage implements OnInit {
   skools;
   constructor() {
     this.skools=[
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
-      {name:'Balaji Pblic School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
+      {name:'Balaji Public Talent School',branch:'Butchirajupalem',registerCode:12345},
     ];
    }
 

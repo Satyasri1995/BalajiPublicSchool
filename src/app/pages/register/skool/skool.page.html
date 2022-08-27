@@ -1,6 +1,6 @@
 <ion-content>
   <ion-row class="ion-align-items-center ion-justify-content-center fill">
-    <ion-col sizeSm="12" sizeMd="6">
+    <ion-col sizeSm="12" sizeMd="4">
       <ion-card>
         <ion-card-header>
           <ion-card-title color="tertiary">
@@ -25,7 +25,7 @@
               <ion-label position="floating">Postal Name</ion-label>
               <ion-input type="number"></ion-input>
             </ion-item>
-            <ion-button fill="outline" class="ion-margin-top">
+            <ion-button fill="outline" class="ion-margin-top" (click)="onSubmit()">
               <ion-label>Submit</ion-label>
             </ion-button>
           </form>

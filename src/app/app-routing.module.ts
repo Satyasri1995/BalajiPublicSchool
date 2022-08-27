@@ -19,6 +19,18 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'update-schedule-item',
+    loadChildren: () => import('./pages/update-schedule-item/update-schedule-item.module').then( m => m.UpdateScheduleItemPageModule)
+  },
+  {
+    path: 'leisures',
+    loadChildren: () => import('./pages/leisures/leisures.module').then( m => m.LeisuresPageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
+  },
 ];
 
 @NgModule({

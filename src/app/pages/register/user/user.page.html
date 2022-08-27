@@ -11,9 +11,12 @@
       </ion-item-options>
       <ion-item>
         <div class="list_item ion-margin-top ion-margin-bottom">
-          <div class="list_item_title">{{skool.name}}</div>
+          <div class="list_item_title ion-text-nowrap">{{skool.name}}</div>
           <div class="list_item_subtitle">Branch : {{skool.branch}}</div>
-          <div class="list_item_subtitle">Registration No : {{skool.registerCode}}</div>
+        </div>
+        <div slot="end" class="list_item_subtitle flex-column">
+          <span>Reg No</span>
+          <span>{{skool.registerCode}}</span>
         </div>
       </ion-item>
       <ion-item-options side="end" expandable>
