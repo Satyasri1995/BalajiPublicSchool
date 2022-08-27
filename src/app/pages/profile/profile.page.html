@@ -25,11 +25,17 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-row class="ion-justify-content-center fill">
-      <ion-col sizeSm="12" sizeMd="4">
-        <app-basic-details></app-basic-details>
-        <app-schedule></app-schedule>
-      </ion-col>
-    </ion-row>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="details">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <ion-label>Basic Details</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="schedule">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-label>My Schedule</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
   </ion-content>
 </div>

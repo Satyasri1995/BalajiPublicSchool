@@ -1,7 +1,7 @@
 export interface ISchedule {
   id: string;
   day: number;
-  period: string;
+  period: number;
   subject: string;
   class: string;
   section: string;
@@ -12,7 +12,7 @@ export interface ISchedule {
 export class Schedule {
   id: string;
   day: number;
-  period: string;
+  period: number;
   subject: string;
   class: string;
   section: string;

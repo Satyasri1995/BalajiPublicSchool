@@ -16,7 +16,7 @@
           <div class="ion-no-padding ion-padding-horizontal" slot="content">
             <ion-list class="ion-no-padding">
               <ion-item *ngFor="let schedule of leisure.schedules" class="list_item ion-no-margin ion-no-padding">
-                <ion-label>{{schedule.period}}</ion-label>
+                <ion-label>{{schedule.period}}<sup>{{schedule.period|rank}}</sup> Period</ion-label>
               </ion-item>
             </ion-list>
           </div>

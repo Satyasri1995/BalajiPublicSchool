@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-back-button slot="start" defaultHref="/profile"></ion-back-button>
     <ion-title>Schedule</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="doDismissModal()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

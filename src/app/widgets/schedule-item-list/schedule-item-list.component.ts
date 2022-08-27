@@ -1,7 +1,10 @@
+import { element } from 'protractor';
+import { UpdateScheduleItemComponent } from './../update-schedule-item/update-schedule-item.component';
 import { Router } from '@angular/router';
 import { ISchedule } from './../../models/schedule';
 import { Component, OnInit } from '@angular/core';
 import { Schedule } from 'src/app/models/schedule';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-schedule-item-list',
@@ -10,11 +13,11 @@ import { Schedule } from 'src/app/models/schedule';
 })
 export class ScheduleItemListComponent implements OnInit {
   mySchedule;
-  constructor(private readonly router: Router) {
+  constructor(private readonly modal: ModalController) {
     this.mySchedule = [
       new Schedule({
         id: Math.random().toString(),
-        period: '1st Period',
+        period: 1,
         day: 1,
         class: '7th Class',
         subject: 'English',
@@ -27,8 +30,15 @@ export class ScheduleItemListComponent implements OnInit {
 
   ngOnInit() {}
 
-  doEditSchedule(schedule: ISchedule|null) {
-    this.router.navigate(['/update-schedule-item']);
+  doEditSchedule(schedule: ISchedule | null) {
+    this.modal
+      .create({ component: UpdateScheduleItemComponent })
+      .then((modalEle) => {
+        modalEle.present();
+        return modalEle.onDidDismiss();
+      }).then((result)=>{
+        console.log(result.role);
+      });
   }
 
   doDeleteSchedule(schedule: ISchedule) {

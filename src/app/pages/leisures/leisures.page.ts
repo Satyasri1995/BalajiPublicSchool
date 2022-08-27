@@ -17,7 +17,7 @@ export class LeisuresPage implements OnInit {
         schedules: [
           new Schedule({
             id: Math.random().toString(),
-            period: '1st Period',
+            period: 1,
             day: 1,
             class: '7th Class',
             subject: 'English',
@@ -35,7 +35,7 @@ export class LeisuresPage implements OnInit {
         schedules: [
           new Schedule({
             id: Math.random().toString(),
-            period: '2nd Period',
+            period: 1,
             day: 1,
             class: '7th Class',
             subject: 'English',

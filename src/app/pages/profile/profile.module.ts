@@ -1,6 +1,3 @@
-import { ScheduleItemListComponent } from '../../widgets/schedule-item-list/schedule-item-list.component';
-import { ScheduleComponent } from '../../widgets/schedule/schedule.component';
-import { BasicDetailsComponent } from './../../widgets/basic-details/basic-details.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,9 +18,6 @@ import { RankPipe } from 'src/app/pipes/rank.pipe';
   ],
   declarations: [
     ProfilePage,
-    BasicDetailsComponent,
-    ScheduleComponent,
-    ScheduleItemListComponent,
     RankPipe
   ]
 })

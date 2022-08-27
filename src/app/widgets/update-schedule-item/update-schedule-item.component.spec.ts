@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { UpdateScheduleItemPage } from './update-schedule-item.page';
+import { UpdateScheduleItemComponent } from './update-schedule-item.component';
 
-describe('UpdateScheduleItemPage', () => {
-  let component: UpdateScheduleItemPage;
-  let fixture: ComponentFixture<UpdateScheduleItemPage>;
+describe('UpdateScheduleItemComponent', () => {
+  let component: UpdateScheduleItemComponent;
+  let fixture: ComponentFixture<UpdateScheduleItemComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UpdateScheduleItemPage ],
+      declarations: [ UpdateScheduleItemComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UpdateScheduleItemPage);
+    fixture = TestBed.createComponent(UpdateScheduleItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
