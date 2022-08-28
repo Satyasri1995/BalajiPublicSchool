@@ -3,7 +3,7 @@ import { RankPipe } from 'src/app/pipes/rank.pipe';
 import { ScheduleItemListComponent } from './../../../widgets/schedule-item-list/schedule-item-list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,7 +14,7 @@ import { MySchedulePage } from './my-schedule.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     MySchedulePageRoutingModule
   ],

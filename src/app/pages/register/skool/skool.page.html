@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-row class="ion-align-items-center ion-justify-content-center fill">
+  <ion-row class="ion-justify-content-center fill">
     <ion-col sizeSm="12" sizeMd="4">
       <ion-card>
         <ion-card-header>
@@ -8,24 +8,52 @@
           </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          <form>
+          <form [formGroup]="skoolRegisterForm" (ngSubmit)="onSubmit()">
             <ion-item>
               <ion-label position="floating">School Name</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input formControlName="skool" type="text"></ion-input>
             </ion-item>
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row
+                  *ngIf="skoolRegisterForm.controls.skool.errors?.required&&skoolRegisterForm.controls.skool.touched"
+                  color="danger">It is required to enter the School Name</ion-row>
+              </ion-col>
+            </ion-row>
             <ion-item>
               <ion-label position="floating">Branch Name</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input formControlName="branch" type="text"></ion-input>
             </ion-item>
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row
+                  *ngIf="skoolRegisterForm.controls.branch.errors?.required&&skoolRegisterForm.controls.branch.touched"
+                  color="danger">It is required to enter the Branch Name</ion-row>
+              </ion-col>
+            </ion-row>
             <ion-item>
               <ion-label position="floating">Registration Code</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input formControlName="regCode" type="text"></ion-input>
             </ion-item>
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row
+                  *ngIf="skoolRegisterForm.controls.regCode.errors?.required&&skoolRegisterForm.controls.regCode.touched"
+                  color="danger">It is required to enter the Registration Code</ion-row>
+              </ion-col>
+            </ion-row>
             <ion-item>
-              <ion-label position="floating">Postal Name</ion-label>
-              <ion-input type="number"></ion-input>
+              <ion-label position="floating">Postal Code</ion-label>
+              <ion-input formControlName="postalCode" type="number"></ion-input>
             </ion-item>
-            <ion-button fill="outline" class="ion-margin-top" (click)="onSubmit()">
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row
+                  *ngIf="skoolRegisterForm.controls.postalCode.errors?.required&&skoolRegisterForm.controls.postalCode.touched"
+                  color="danger">It is required to enter the Postal Code</ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-button type="submit" fill="outline" class="ion-margin-top">
               <ion-label>Submit</ion-label>
             </ion-button>
           </form>

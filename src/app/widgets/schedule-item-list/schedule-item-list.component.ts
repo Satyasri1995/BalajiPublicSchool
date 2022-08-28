@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ISchedule } from './../../models/schedule';
 import { Component, OnInit } from '@angular/core';
 import { Schedule } from 'src/app/models/schedule';
-import { ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-schedule-item-list',
@@ -13,7 +13,10 @@ import { ModalController } from '@ionic/angular';
 })
 export class ScheduleItemListComponent implements OnInit {
   mySchedule;
-  constructor(private readonly modal: ModalController) {
+  constructor(
+    private readonly modal: ModalController,
+    private readonly actionSheet: ActionSheetController
+  ) {
     this.mySchedule = [
       new Schedule({
         id: Math.random().toString(),
@@ -36,12 +39,41 @@ export class ScheduleItemListComponent implements OnInit {
       .then((modalEle) => {
         modalEle.present();
         return modalEle.onDidDismiss();
-      }).then((result)=>{
+      })
+      .then((result) => {
         console.log(result.role);
       });
   }
 
   doDeleteSchedule(schedule: ISchedule) {
     console.log(schedule);
+  }
+
+  doActionSheet(schedule: ISchedule) {
+   const actionSheet = this.actionSheet.create({
+      header:'Choose your action',
+      buttons:[
+        {
+          text:'Edit Schedule',
+          role:'edit',
+          icon:'create-outline',
+          handler:()=>this.doEditSchedule(schedule)
+        },
+        {
+          text:'Delete Schedule',
+          role:'delete',
+          icon:'trash-outline',
+          handler:()=>this.doEditSchedule(schedule)
+        },
+        {
+          text:'Cancel',
+          role:'cancel',
+          icon:'close'
+        }
+      ]
+    });
+    actionSheet.then((actionSheetEle)=>{
+      actionSheetEle.present();
+    });
   }
 }

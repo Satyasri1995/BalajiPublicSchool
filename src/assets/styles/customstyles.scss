@@ -22,3 +22,10 @@
 .flex{
   flex: 1;
 }
+
+.error-message{
+  & ion-row{
+    font-size:10px;
+    color: var(--ion-color-danger);
+  }
+}

@@ -1,4 +1,10 @@
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      DigiSkool
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-row class="ion-align-items-center ion-justify-content-center fill">
     <ion-col sizeMd="4" sizeSm="12">
@@ -9,16 +15,32 @@
           </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content *ngIf="isSignIn">
-          <form>
+          <form [formGroup]="loginForm" (ngSubmit)="doSignIn()">
             <ion-item>
               <ion-label position="floating">E-Mail</ion-label>
-              <ion-input type="mail"></ion-input>
+              <ion-input type="mail" formControlName="mail"></ion-input>
             </ion-item>
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row *ngIf="loginForm.controls.mail.errors?.required&&loginForm.controls.mail.touched"
+                  color="danger">It is required to enter the E-Mail ID</ion-row>
+                <ion-row *ngIf="loginForm.controls.mail.errors?.email&&loginForm.controls.mail.touched"
+                  color="danger">Please enter a valid E-Mail ID</ion-row>
+              </ion-col>
+            </ion-row>
             <ion-item>
               <ion-label position="floating">Password</ion-label>
-              <ion-input type="password"></ion-input>
+              <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
-            <ion-button fill="outline" class="ion-margin-top" (click)="doSignIn()">
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row *ngIf="loginForm.controls.password.errors?.required&&loginForm.controls.password.touched"
+                  color="danger">It is required to enter the Password</ion-row>
+                <ion-row *ngIf="loginForm.controls.password.errors?.pattern&&loginForm.controls.password.touched"
+                  color="danger">Password should have character,number,alpha and should have 8 characters</ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-button type="submit" fill="outline" class="ion-margin-top">
               <ion-label>Sign-In</ion-label>
             </ion-button>
           </form>
@@ -29,24 +51,54 @@
           </ion-row>
         </ion-card-content>
         <ion-card-content *ngIf="!isSignIn">
-          <form>
+          <form [formGroup]="signupForm" (ngSubmit)="doSignup()">
             <ion-item>
               <ion-label position="floating">E-Mail</ion-label>
-              <ion-input type="mail"></ion-input>
+              <ion-input type="mail" formControlName="mail"></ion-input>
             </ion-item>
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row *ngIf="signupForm.controls.mail.errors?.required&&signupForm.controls.mail.touched"
+                  color="danger">It is required to enter the E-Mail ID</ion-row>
+                <ion-row *ngIf="signupForm.controls.mail.errors?.email&&signupForm.controls.mail.touched"
+                  color="danger">Please enter a valid E-Mail ID</ion-row>
+              </ion-col>
+            </ion-row>
             <ion-item>
               <ion-label position="floating">Name</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input type="text" formControlName="name"></ion-input>
             </ion-item>
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row *ngIf="signupForm.controls.name.errors?.required&&signupForm.controls.name.touched"
+                  color="danger">It is required to enter the Name</ion-row>
+              </ion-col>
+            </ion-row>
             <ion-item>
               <ion-label position="floating">Password</ion-label>
-              <ion-input type="password"></ion-input>
+              <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row *ngIf="signupForm.controls.password.errors?.required&&signupForm.controls.password.touched"
+                  color="danger">It is required to enter the Password</ion-row>
+                <ion-row *ngIf="signupForm.controls.password.errors?.pattern&&signupForm.controls.password.touched"
+                  color="danger">Password should have character,number,alpha and should have 8 characters</ion-row>
+              </ion-col>
+            </ion-row>
             <ion-item>
               <ion-label position="floating">Confirm Password</ion-label>
-              <ion-input type="password"></ion-input>
+              <ion-input type="password" formControlName="confirmPassword"></ion-input>
             </ion-item>
-            <ion-button fill="outline" class="ion-margin-top">
+            <ion-row class="error-message">
+              <ion-col>
+                <ion-row *ngIf="signupForm.controls.confirmPassword.errors?.required&&signupForm.controls.confirmPassword.touched"
+                  color="danger">It is required to enter the Confirm Password</ion-row>
+                <ion-row *ngIf="signupForm.controls.confirmPassword.errors?.confirmedValidator&&signupForm.controls.confirmPassword.touched"
+                  color="danger">Password and Confirm Password should match</ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-button  type="submit" fill="outline" class="ion-margin-top">
               <ion-label>Sign-Up</ion-label>
             </ion-button>
           </form>

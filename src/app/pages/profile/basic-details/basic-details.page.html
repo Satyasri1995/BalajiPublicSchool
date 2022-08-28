@@ -3,53 +3,55 @@
     <ion-card-subtitle color="tertiary">Basic Details</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    <form>
+    <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
-        <ion-input></ion-input>
+        <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
+      <ion-row class="error-message">
+        <ion-col>
+          <ion-row *ngIf="detailsForm.controls.name.errors?.required&&detailsForm.controls.name.touched"
+            color="danger">It is required to enter the Name</ion-row>
+        </ion-col>
+      </ion-row>
       <ion-item>
         <ion-label position="floating">Mail</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="mail" type="mail"></ion-input>
       </ion-item>
+      <ion-row class="error-message">
+        <ion-col>
+          <ion-row *ngIf="detailsForm.controls.mail.errors?.required&&detailsForm.controls.mail.touched"
+            color="danger">It is required to enter the E-Mail ID</ion-row>
+          <ion-row *ngIf="detailsForm.controls.mail.errors?.email&&detailsForm.controls.mail.touched"
+            color="danger">Please enter a valid E-Mail ID</ion-row>
+        </ion-col>
+      </ion-row>
       <ion-item>
         <ion-label position="floating">Class Teacher Of</ion-label>
-        <ion-select placeholder="Select Class">
-          <ion-select-option [value]="'None'">None</ion-select-option>
-          <ion-select-option [value]="'Nursery'">Nursery</ion-select-option>
-          <ion-select-option [value]="'LKG'">LKG</ion-select-option>
-          <ion-select-option [value]="'UKG'">UKG</ion-select-option>
-          <ion-select-option [value]="'1ˢᵗ Class'">1ˢᵗ Class</ion-select-option>
-          <ion-select-option [value]="'2ⁿᵈ Class'">2ⁿᵈ Class</ion-select-option>
-          <ion-select-option [value]="'3ʳᵈ Class'">3ʳᵈ Class</ion-select-option>
-          <ion-select-option [value]="'4ᵗʰ Class'">4ᵗʰ Class</ion-select-option>
-          <ion-select-option [value]="'5ᵗʰ Class'">5ᵗʰ Class</ion-select-option>
-          <ion-select-option [value]="'6ᵗʰ Class'">6ᵗʰ Class</ion-select-option>
-          <ion-select-option [value]="'7ᵗʰ Class'">7ᵗʰ Class</ion-select-option>
-          <ion-select-option [value]="'8ᵗʰ Class'">8ᵗʰ Class</ion-select-option>
-          <ion-select-option [value]="'9ᵗʰ Class'">9ᵗʰ Class</ion-select-option>
-          <ion-select-option [value]="'10ᵗʰ Class'">10ᵗʰ Class</ion-select-option>
+        <ion-select formControlName="classTeacherOf" placeholder="Select Class">
+          <ion-select-option *ngFor="let class of classOptions" [value]="class.value">{{class.label}}
+          </ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-row class="error-message">
+        <ion-col>
+          <ion-row *ngIf="detailsForm.controls.classTeacherOf.errors?.required&&detailsForm.controls.classTeacherOf.touched"
+            color="danger">It is required to select the Class</ion-row>
+        </ion-col>
+      </ion-row>
       <ion-item>
         <ion-label position="floating">Teachings</ion-label>
-        <ion-select placeholder="Select Subject" multiple="true">
-          <ion-select-option [value]="'Telugu'">Telugu</ion-select-option>
-          <ion-select-option [value]="'Sanskrit'">Sanskrit</ion-select-option>
-          <ion-select-option [value]="'Hindi'">Hindi</ion-select-option>
-          <ion-select-option [value]="'English'">English</ion-select-option>
-          <ion-select-option [value]="'Mathematics'">Mathematics</ion-select-option>
-          <ion-select-option [value]="'Physical Science'">Science</ion-select-option>
-          <ion-select-option [value]="'Natural Science'">Science</ion-select-option>
-          <ion-select-option [value]="'Computer Science'">Computer Science</ion-select-option>
-          <ion-select-option [value]="'Social'">Social</ion-select-option>
-          <ion-select-option [value]="'General Knowledge'">General Knowledge</ion-select-option>
-          <ion-select-option [value]="'Physical Training'">Physical Training</ion-select-option>
-          <ion-select-option [value]="'Abacus'">Abacus</ion-select-option>
-          <ion-select-option [value]="'Geeta'">Geeta</ion-select-option>
-          <ion-select-option [value]="'MPT'">MPT</ion-select-option>
+        <ion-select formControlName="teachings" placeholder="Select Subject" multiple="true">
+          <ion-select-option *ngFor="let subject of subjectOptions" [value]="subject.value">{{subject.label}}
+          </ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-row class="error-message">
+        <ion-col>
+          <ion-row *ngIf="detailsForm.controls.teachings.errors?.required&&detailsForm.controls.teachings.touched"
+            color="danger">It is required to select Teachings</ion-row>
+        </ion-col>
+      </ion-row>
       <ion-button slot="start" fill="outline" class="ion-margin-top">
         <ion-label>Save</ion-label>
       </ion-button>
