@@ -7,21 +7,17 @@
 
 <ion-content>
   <ion-row class="ion-justify-content-center fill">
-    <ion-col sizeSm="12" sizeMd="4" class="ion-no-padding ion-no-margin">
-      <ion-accordion-group>
-        <ion-accordion *ngFor="let leisure of leisures" [value]="leisure.name">
-          <ion-item slot="header">
-            <ion-label>{{leisure.name}}</ion-label>
-          </ion-item>
-          <div class="ion-no-padding ion-padding-horizontal" slot="content">
-            <ion-list class="ion-no-padding">
-              <ion-item *ngFor="let schedule of leisure.schedules" class="list_item ion-no-margin ion-no-padding">
-                <ion-label>{{schedule.period}}<sup>{{schedule.period|rank}}</sup> Period</ion-label>
-              </ion-item>
-            </ion-list>
+    <ion-col sizeSm="12" sizeMd="4">
+      <ion-list class="ion-no-padding ion-no-margin">
+        <ion-item *ngFor="let leisure of leisures" class="ion-no-padding ion-no-margin">
+          <div class="list_item ion-margin">
+            <div class="list_item_title ion-text-nowrap">{{leisure.name}}</div>
+            <ion-row>
+              <ion-badge color="secondary" style="margin: 5px;" *ngFor="let schedule of leisure.schedules">{{schedule.period}}{{schedule.period|rank}} Period</ion-badge>
+            </ion-row>
           </div>
-        </ion-accordion>
-      </ion-accordion-group>
+        </ion-item>
+      </ion-list>
     </ion-col>
   </ion-row>
 </ion-content>

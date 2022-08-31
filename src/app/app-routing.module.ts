@@ -16,12 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
     path: 'leisures',
     loadChildren: () => import('./pages/leisures/leisures.module').then( m => m.LeisuresPageModule)
+  },
+  {
+    path: 'admin-menu',
+    loadChildren: () => import('./pages/admin-menu/admin-menu.module').then( m => m.AdminMenuPageModule)
   }
 ];
 

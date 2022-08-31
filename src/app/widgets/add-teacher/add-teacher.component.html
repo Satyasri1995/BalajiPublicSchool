@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Add Teacher</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row class="ion-justify-content-center fill">
+    <ion-col sizeSm="12" sizeMd="4">
+      <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-row class="error-message">
+          <ion-col>
+            <ion-row
+              *ngIf="teacherForm.controls.name.errors?.required&&teacherForm.controls.name.touched"
+              color="danger">It is required to enter the  Name</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-item>
+          <ion-label position="floating">Mail</ion-label>
+          <ion-input formControlName="mail" type="text"></ion-input>
+        </ion-item>
+        <ion-row class="error-message">
+          <ion-col>
+            <ion-row
+              *ngIf="teacherForm.controls.mail.errors?.required&&teacherForm.controls.mail.touched"
+              color="danger">It is required to enter the Mail</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-item>
+          <ion-label position="floating">Phone</ion-label>
+          <ion-input formControlName="mail" type="text"></ion-input>
+        </ion-item>
+        <ion-row class="error-message">
+          <ion-col>
+            <ion-row
+              *ngIf="teacherForm.controls.phone.errors?.required&&teacherForm.controls.phone.touched"
+              color="danger">It is required to enter the Phone</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-button class="ion-margin" fill="outline" type="submit">
+          <ion-label>Add</ion-label>
+        </ion-button>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

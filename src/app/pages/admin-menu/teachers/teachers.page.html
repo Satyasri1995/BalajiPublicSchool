@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-back-button slot="start" defaultHref="/admin-menu"></ion-back-button>
+    <ion-title>Teachers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light" (click)="addTeacher()">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="removeTeacher()">
+        <ion-icon name="person-remove-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-row class="ion-justify-content-center fill">
+    <ion-col sizeSm="12" sizeMd="4" class="ion-no-padding">
+      <ion-accordion-group>
+        <ion-accordion value="first">
+          <ion-item slot="header">
+            <ion-label>Teacher Name</ion-label>
+          </ion-item>
+          <div class="ion-no-padding" slot="content">
+            <app-teacher-data></app-teacher-data>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="first2">
+          <ion-item slot="header">
+            <ion-label>Teacher Name</ion-label>
+          </ion-item>
+          <div class="ion-no-padding" slot="content">
+            <app-teacher-data></app-teacher-data>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-col>
+  </ion-row>
+</ion-content>

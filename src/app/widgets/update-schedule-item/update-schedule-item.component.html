@@ -27,7 +27,7 @@
         </ion-row>
         <ion-item>
           <ion-label position="floating">Class</ion-label>
-          <ion-select formControlName="class" placeholder="Select Class">
+          <ion-select #class formControlName="class" placeholder="Select Class">
             <ion-select-option *ngFor="let class of classOptions" [value]="class.value">{{class.label}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -39,7 +39,7 @@
         </ion-row>
         <ion-item>
           <ion-label position="floating">Section</ion-label>
-          <ion-select formControlName="section" placeholder="Select Section">
+          <ion-select [disabled]="class.value==='NA'" formControlName="section" placeholder="Select Section">
             <ion-select-option *ngFor="let section of sectionOptions" [value]="section.value">{{section.label}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -51,8 +51,8 @@
         </ion-row>
         <ion-item>
           <ion-label position="floating">Period</ion-label>
-          <ion-select formControlName="period" placeholder="Select Period">
-            <ion-select-option *ngFor="let period of periodOptions" [value]="period.value">{{period.value}}{{period.value|rank}} Period</ion-select-option>
+          <ion-select [disabled]="class.value==='NA'" formControlName="period" placeholder="Select Period">
+            <ion-select-option *ngFor="let period of periodOptions" [value]="period.value">{{period.value}}<sup>{{period.value|rank}}</sup> Period</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-row class="error-message">
@@ -63,7 +63,7 @@
         </ion-row>
         <ion-item>
           <ion-label position="floating">Subject</ion-label>
-          <ion-select formControlName="subject" placeholder="Select Subject">
+          <ion-select [disabled]="class.value==='NA'" formControlName="subject" placeholder="Select Subject">
             <ion-select-option *ngFor="let subject of subjectOptions" [value]="subject.value">{{subject.label}}</ion-select-option>
           </ion-select>
         </ion-item>

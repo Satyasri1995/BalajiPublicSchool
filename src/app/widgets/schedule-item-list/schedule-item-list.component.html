@@ -1,5 +1,6 @@
 <ion-list>
-  <ion-item class="list_item ion-no-margin ion-no-padding" *ngFor="let schedule of mySchedule;let i=index" (click)="doActionSheet(schedule)">
+  <ion-item class="list_item ion-no-margin ion-no-padding ion-activatable ripple-parent" *ngFor="let schedule of mySchedule;let i=index" (click)="doActionSheet(schedule)">
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
     <div class="flex-column">
       <div class="list_item_title">{{schedule.period}}<sup>{{schedule.period|rank}}</sup></div>
       <div class="list_item_subtitle">Period</div>

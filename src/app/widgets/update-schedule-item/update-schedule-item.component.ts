@@ -19,7 +19,7 @@ export class UpdateScheduleItemComponent implements OnInit {
     private readonly fb: FormBuilder
   ) {
     this.classOptions = [
-      { label: 'None', value: 'None' },
+      { label: 'Leisure', value: 'NA' },
       { label: 'Nursery', value: 'Nursery' },
       { label: 'LKG', value: 'LKG' },
       { label: 'UKG', value: 'UKG' },
@@ -79,19 +79,54 @@ export class UpdateScheduleItemComponent implements OnInit {
 
   ngOnInit() {
     this.scheduleForm = this.fb.group({
-      day: [null, [Validators.required]],
-      class: [null, [Validators.required]],
-      section: [null, [Validators.required]],
-      period: [null, [Validators.required]],
-      subject: [null, [Validators.required]],
+      day: [new Date().getDay(), [Validators.required]],
+      class: [undefined, [Validators.required]],
+      section: [undefined, [Validators.required]],
+      period: [undefined, [Validators.required]],
+      subject: [undefined, [Validators.required]],
     });
+    this.scheduleForm.valueChanges.subscribe((formValue) => this.leisureValidation(formValue));
+  }
+
+  leisureValidation(formValue){
+    if (
+      formValue.class === 'NA' &&
+      formValue.section !== 'NA' &&
+      formValue.period !== 0 &&
+      formValue.subject !== 'NA'
+    ) {
+      this.subjectOptions.unshift({label:'NA',value:'NA'});
+      this.periodOptions.unshift({label:'NA',value:0});
+      this.sectionOptions.unshift({label:'NA',value:'NA'});
+      this.scheduleForm.setValue({
+        ...formValue,
+        section: 'NA',
+        period: 0,
+        subject: 'NA',
+      });
+    }else if (
+      formValue.class !== 'NA' &&
+      formValue.section === 'NA' &&
+      formValue.period === 0 &&
+      formValue.subject === 'NA'
+    ){
+      this.subjectOptions=this.subjectOptions.filter(item=>item.value!=='NA');
+      this.periodOptions=this.periodOptions.filter(item=>item.value!==0);
+      this.sectionOptions=this.sectionOptions.filter(item=>item.value!=='NA');
+      this.scheduleForm.setValue({
+        ...formValue,
+        section: null,
+        period: null,
+        subject: null,
+      });
+    }
   }
 
   doDismissModal() {
     this.modal.dismiss(null, 'cancel');
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.scheduleForm);
   }
 }
