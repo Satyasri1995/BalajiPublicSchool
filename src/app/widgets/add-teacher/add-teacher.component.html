@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Add Teacher</ion-title>
+    <ion-title>Add/Edit Teacher</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cancel()">
         <ion-icon slot="icon-only" name="close-outline"></ion-icon>
@@ -43,6 +43,42 @@
             <ion-row
               *ngIf="teacherForm.controls.phone.errors?.required&&teacherForm.controls.phone.touched"
               color="danger">It is required to enter the Phone</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-item>
+          <ion-label position="floating">Class</ion-label>
+          <ion-select #class formControlName="class" placeholder="Select Class">
+            <ion-select-option *ngFor="let class of classOptions" [value]="class.value">{{class.label}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-row class="error-message">
+          <ion-col>
+            <ion-row *ngIf="teacherForm.controls.class.errors?.required&&teacherForm.controls.class.touched"
+              color="danger">It is required to select a Class</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-item>
+          <ion-label position="floating">Section</ion-label>
+          <ion-select [disabled]="class.value==='None'" formControlName="section" placeholder="Select Section">
+            <ion-select-option *ngFor="let section of sectionOptions" [value]="section.value">{{section.label}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-row class="error-message">
+          <ion-col>
+            <ion-row *ngIf="teacherForm.controls.section.errors?.required&&teacherForm.controls.section.touched"
+              color="danger">It is required to select a Section</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-item>
+          <ion-label position="floating">Subjects</ion-label>
+          <ion-select multiple="true" formControlName="subjects" placeholder="Select Subject">
+            <ion-select-option *ngFor="let subject of subjectOptions" [value]="subject.value">{{subject.label}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-row class="error-message">
+          <ion-col>
+            <ion-row *ngIf="teacherForm.controls.subjects.errors?.required&&teacherForm.controls.subjects.touched"
+              color="danger">It is required to select a Subject</ion-row>
           </ion-col>
         </ion-row>
         <ion-button class="ion-margin" fill="outline" type="submit">

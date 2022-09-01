@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-back-button slot="start" defaultHref="/admin-menu/teachers"></ion-back-button>
+    <ion-title>Teacher's info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center fill">
+    <ion-col sizeSm="12" sizeMd="4">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle color="tertiary">Basic Info</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="list_item">
+            <div class="list_item_title">Teacher Name</div>
+            <ion-row class="list_item_subtitle ion-align-items-center">
+              <span>Class Teacher : </span> &nbsp;
+              <span> None</span>
+            </ion-row>
+            <ion-row class="list_item_subtitle ion-align-items-center">
+              <span>Phone : </span> &nbsp;
+              <span>9492349001</span>
+            </ion-row>
+            <ion-row class="list_item_subtitle ion-align-items-center">
+              <span>Mail : </span> &nbsp;
+              <span>venkatasatya.davuloori@gmail.com</span>
+            </ion-row>
+            <ion-row class="list_item_subtitle ion-align-items-center">
+              <span>Subject Taught : </span> &nbsp;
+              <span>English</span>
+            </ion-row>
+          </div>
+          <ion-row class="ion-justify-content-end">
+            <ion-button fill="clear" size="small" (click)="editBasicInfo()">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              <ion-label>Edit</ion-label>
+            </ion-button>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle color="tertiary">Schedule</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group [value]="today">
+            <ion-accordion [value]="1">
+              <ion-item slot="header">
+                <ion-label>Monday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="2">
+              <ion-item slot="header">
+                <ion-label>Tuesday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="3">
+              <ion-item slot="header">
+                <ion-label>Wednsday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="4">
+              <ion-item slot="header">
+                <ion-label>Thursday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="5">
+              <ion-item slot="header">
+                <ion-label>Friday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="6">
+              <ion-item slot="header">
+                <ion-label>Saturday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle color="tertiary">Leisures</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group [value]="today">
+            <ion-accordion [value]="1">
+              <ion-item slot="header">
+                <ion-label>Monday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <ion-badge>1st Period</ion-badge>
+                <ion-badge>2nd Period</ion-badge>
+                <ion-badge>3rd Period</ion-badge>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="2">
+              <ion-item slot="header">
+                <ion-label>Tuesday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <ion-badge>1st Period</ion-badge>
+                <ion-badge>2nd Period</ion-badge>
+                <ion-badge>3rd Period</ion-badge>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="3">
+              <ion-item slot="header">
+                <ion-label>Wednsday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <ion-badge>1st Period</ion-badge>
+                <ion-badge>2nd Period</ion-badge>
+                <ion-badge>3rd Period</ion-badge>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="4">
+              <ion-item slot="header">
+                <ion-label>Thursday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <ion-badge>1st Period</ion-badge>
+                <ion-badge>2nd Period</ion-badge>
+                <ion-badge>3rd Period</ion-badge>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="5">
+              <ion-item slot="header">
+                <ion-label>Friday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <ion-badge>1st Period</ion-badge>
+                <ion-badge>2nd Period</ion-badge>
+                <ion-badge>3rd Period</ion-badge>
+              </div>
+            </ion-accordion>
+            <ion-accordion [value]="6">
+              <ion-item slot="header">
+                <ion-label>Saturday</ion-label>
+              </ion-item>
+              <div class="ion-no-padding" slot="content">
+                <ion-badge>1st Period</ion-badge>
+                <ion-badge>2nd Period</ion-badge>
+                <ion-badge>3rd Period</ion-badge>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

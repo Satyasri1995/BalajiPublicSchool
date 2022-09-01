@@ -1,8 +1,6 @@
-import { element } from 'protractor';
 import { UpdateScheduleItemComponent } from './../update-schedule-item/update-schedule-item.component';
-import { Router } from '@angular/router';
 import { ISchedule } from './../../models/schedule';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Schedule } from 'src/app/models/schedule';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 
@@ -12,6 +10,7 @@ import { ActionSheetController, ModalController } from '@ionic/angular';
   styleUrls: ['./schedule-item-list.component.scss'],
 })
 export class ScheduleItemListComponent implements OnInit {
+  @Input() mode: string;
   mySchedule;
   constructor(
     private readonly modal: ModalController,
@@ -34,6 +33,9 @@ export class ScheduleItemListComponent implements OnInit {
   ngOnInit() {}
 
   doEditSchedule(schedule: ISchedule | null) {
+    if(this.mode!=='edit'){
+      return;
+    }
     this.modal
       .create({ component: UpdateScheduleItemComponent })
       .then((modalEle) => {
@@ -50,6 +52,9 @@ export class ScheduleItemListComponent implements OnInit {
   }
 
   doActionSheet(schedule: ISchedule) {
+    if(this.mode!=='edit'){
+      return;
+    }
    const actionSheet = this.actionSheet.create({
       header:'Choose your action',
       buttons:[

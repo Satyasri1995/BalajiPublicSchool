@@ -1,3 +1,35 @@
-<p>
-  remove-teacher works!
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Remove Teacher</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center fill">
+    <ion-col sizeSm="12" sizeMd="4">
+      <form [formGroup]="removeForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Teacher</ion-label>
+          <ion-select formControlName="teacher">
+            <ion-select-option *ngFor="let teacher of teacherOptions" [value]="teacher.value">{{teacher.label}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-row class="error-message">
+          <ion-col>
+            <ion-row *ngIf="removeForm.controls.teacher.errors?.required&&removeForm.controls.teacher.touched"
+              color="danger">It is required to select a Teacher</ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-button type="submit" fill="outline" class="ion-margin">
+          <ion-label>Remove</ion-label>
+        </ion-button>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

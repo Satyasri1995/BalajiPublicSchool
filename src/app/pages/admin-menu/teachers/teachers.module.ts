@@ -1,6 +1,6 @@
+import { RankPipe } from './../../../pipes/rank.pipe';
 import { RemoveTeacherComponent } from './../../../widgets/remove-teacher/remove-teacher.component';
 import { AddTeacherComponent } from './../../../widgets/add-teacher/add-teacher.component';
-import { TeacherDataComponent } from './../../../widgets/teacher-data/teacher-data.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,14 +11,20 @@ import { TeachersPageRoutingModule } from './teachers-routing.module';
 
 import { TeachersPage } from './teachers.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    TeachersPageRoutingModule
+    TeachersPageRoutingModule,
   ],
-  declarations: [TeachersPage,TeacherDataComponent,AddTeacherComponent,RemoveTeacherComponent],
-  entryComponents:[AddTeacherComponent,RemoveTeacherComponent]
+  declarations: [
+    TeachersPage,
+    RemoveTeacherComponent,
+  ],
+  entryComponents: [
+    RemoveTeacherComponent
+  ],
 })
 export class TeachersPageModule {}

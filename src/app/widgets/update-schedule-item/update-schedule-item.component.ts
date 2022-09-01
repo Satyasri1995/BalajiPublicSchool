@@ -128,5 +128,6 @@ export class UpdateScheduleItemComponent implements OnInit {
 
   onSubmit() {
     console.log(this.scheduleForm);
+    this.doDismissModal();
   }
 }

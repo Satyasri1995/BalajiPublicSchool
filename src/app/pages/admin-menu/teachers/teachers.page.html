@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-back-button slot="start" defaultHref="/admin-menu"></ion-back-button>
+    <ion-back-button slot="start" defaultHref="admin-menu"></ion-back-button>
     <ion-title>Teachers</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,24 +21,22 @@
   </ion-fab>
   <ion-row class="ion-justify-content-center fill">
     <ion-col sizeSm="12" sizeMd="4" class="ion-no-padding">
-      <ion-accordion-group>
-        <ion-accordion value="first">
-          <ion-item slot="header">
-            <ion-label>Teacher Name</ion-label>
-          </ion-item>
-          <div class="ion-no-padding" slot="content">
-            <app-teacher-data></app-teacher-data>
+      <ion-list>
+        <ion-item class="ion-no-padding ion-activatable ripple-parent" detail="true" (click)="viewTeacherData()">
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          <div class="list_item">
+            <div class="list_item_title">Teacher Name</div>
+            <ion-row class="list_item_subtitle ion-align-items-center">
+              <span>Class Teacher : </span> &nbsp;
+              <span>None</span>
+            </ion-row>
+            <ion-row class="list_item_subtitle ion-align-items-center">
+              <span>Subject Taught : </span> &nbsp;
+              <span>English,Hindi</span>
+            </ion-row>
           </div>
-        </ion-accordion>
-        <ion-accordion value="first2">
-          <ion-item slot="header">
-            <ion-label>Teacher Name</ion-label>
-          </ion-item>
-          <div class="ion-no-padding" slot="content">
-            <app-teacher-data></app-teacher-data>
-          </div>
-        </ion-accordion>
-      </ion-accordion-group>
+        </ion-item>
+      </ion-list>
     </ion-col>
   </ion-row>
 </ion-content>
