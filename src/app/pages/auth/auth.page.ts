@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +14,8 @@ export class AuthPage implements OnInit {
   signupForm: FormGroup;
   constructor(
     private readonly router: Router,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService
   ) {
     this.isSignIn = true;
   }
@@ -34,7 +36,7 @@ export class AuthPage implements OnInit {
     this.signupForm = this.fb.group(
       {
         mail: ['', [Validators.required, Validators.email]],
-        name:['',[Validators.required]],
+        name: ['', [Validators.required]],
         password: [
           '',
           [
@@ -76,12 +78,12 @@ export class AuthPage implements OnInit {
 
   doSignIn() {
     // console.log(this.loginForm);
-     this.router.navigate(['/register']);
-  }
-
-  doSignup(){
-    // console.log(this.signupForm);
     this.router.navigate(['/register']);
   }
 
+  doSignup() {
+    const {mail,password}=this.signupForm.value;
+    this.authService.createAccount(mail,password);
+    //this.router.navigate(['/register']);
+  }
 }

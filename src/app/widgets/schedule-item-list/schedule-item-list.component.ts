@@ -32,7 +32,7 @@ export class ScheduleItemListComponent implements OnInit {
 
   ngOnInit() {}
 
-  doEditSchedule(schedule: ISchedule | null) {
+  doEditSchedule(schedule) {
     if(this.mode!=='edit'){
       return;
     }
