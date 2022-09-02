@@ -1,5 +1,6 @@
 export interface IUser {
   id: string;
+  uid:string;
   name: string;
   mail: string;
   phone: number;
@@ -12,6 +13,7 @@ export interface IUser {
 
 export class User {
   id: string;
+  uid:string;
   name: string;
   mail: string;
   phone: number;
@@ -21,14 +23,15 @@ export class User {
   createdAt: Date;
   updatedAt: Date;
   constructor(data?: IUser) {
-    this.id = data?.id;
-    this.name = data?.name;
-    this.mail = data?.mail;
-    this.phone = data?.phone;
-    this.class = data?.class;
-    this.section = data?.section;
-    this.subjects = data?.subjects;
-    this.createdAt = data?.createdAt;
-    this.updatedAt = data?.updatedAt;
+    this.id = data?.id || "";
+    this.uid=data?.uid || "";
+    this.name = data?.name || "";
+    this.mail = data?.mail || "";
+    this.phone = data?.phone || 0;
+    this.class = data?.class || "";
+    this.section = data?.section || "";
+    this.subjects = data?.subjects || [];
+    this.createdAt = data?.createdAt || null;
+    this.updatedAt = data?.updatedAt || null;
   }
 }

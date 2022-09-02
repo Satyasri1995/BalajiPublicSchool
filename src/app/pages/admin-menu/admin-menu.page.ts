@@ -1,4 +1,7 @@
+import { logoutUser } from './../../store/auth/auth.actions';
 import { Component, OnInit } from '@angular/core';
+import { AppState } from '@capacitor/app';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-admin-menu',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminMenuPage implements OnInit {
 
-  constructor() { }
+  constructor(private readonly store:Store<AppState>) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    this.store.dispatch(logoutUser());
   }
 
 }

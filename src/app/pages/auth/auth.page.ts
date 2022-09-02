@@ -1,7 +1,11 @@
+
+import { createAccount, signInUser } from './../../store/auth/auth.actions';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth.service';
+import { AppState } from 'src/app/store/app.store';
 
 @Component({
   selector: 'app-auth',
@@ -15,14 +19,22 @@ export class AuthPage implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly fb: FormBuilder,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly store: Store<AppState>
   ) {
     this.isSignIn = true;
   }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      mail: ['', [Validators.required, Validators.email]],
+      mail: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
+        ],
+      ],
       password: [
         '',
         [
@@ -35,7 +47,14 @@ export class AuthPage implements OnInit {
     });
     this.signupForm = this.fb.group(
       {
-        mail: ['', [Validators.required, Validators.email]],
+        mail: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+            Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
+          ],
+        ],
         name: ['', [Validators.required]],
         password: [
           '',
@@ -77,13 +96,12 @@ export class AuthPage implements OnInit {
   }
 
   doSignIn() {
-    // console.log(this.loginForm);
-    this.router.navigate(['/register']);
+    const { mail, password } = this.loginForm.value;
+    this.store.dispatch(signInUser({mail,password}));
   }
 
   doSignup() {
-    const {mail,password}=this.signupForm.value;
-    this.authService.createAccount(mail,password);
-    //this.router.navigate(['/register']);
+    const { mail, password } = this.signupForm.value;
+    this.store.dispatch(createAccount({ mail, password }));
   }
 }

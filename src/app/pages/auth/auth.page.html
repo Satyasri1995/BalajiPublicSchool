@@ -24,7 +24,7 @@
               <ion-col>
                 <ion-row *ngIf="loginForm.controls.mail.errors?.required&&loginForm.controls.mail.touched"
                   color="danger">It is required to enter the E-Mail ID</ion-row>
-                <ion-row *ngIf="loginForm.controls.mail.errors?.email&&loginForm.controls.mail.touched"
+                <ion-row *ngIf="loginForm.controls.mail.errors?.pattern&&loginForm.controls.mail.touched"
                   color="danger">Please enter a valid E-Mail ID</ion-row>
               </ion-col>
             </ion-row>
@@ -40,7 +40,7 @@
                   color="danger">Password should have character,number,alpha and should have 8 characters</ion-row>
               </ion-col>
             </ion-row>
-            <ion-button type="submit" fill="outline" class="ion-margin-top">
+            <ion-button [disabled]="!loginForm.valid" type="submit" fill="outline" class="ion-margin-top">
               <ion-label>Sign-In</ion-label>
             </ion-button>
           </form>
@@ -98,7 +98,7 @@
                   color="danger">Password and Confirm Password should match</ion-row>
               </ion-col>
             </ion-row>
-            <ion-button  type="submit" fill="outline" class="ion-margin-top">
+            <ion-button [disabled]="!signupForm.valid" type="submit" fill="outline" class="ion-margin-top">
               <ion-label>Sign-Up</ion-label>
             </ion-button>
           </form>
