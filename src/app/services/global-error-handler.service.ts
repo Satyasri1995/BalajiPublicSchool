@@ -15,6 +15,8 @@ export class GlobalErrorHandlerService implements ErrorHandler {
           buttons: ['ok'],
         });
         toast.present();
+      }else{
+        console.log(error)
       }
   }
 }

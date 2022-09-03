@@ -11,12 +11,12 @@
       <form [formGroup]="skoolRegisterForm" (ngSubmit)="onSubmit()">
         <ion-item>
           <ion-label position="floating">School Name</ion-label>
-          <ion-input formControlName="skool" type="text"></ion-input>
+          <ion-input formControlName="name" type="text"></ion-input>
         </ion-item>
         <ion-row class="error-message">
           <ion-col>
             <ion-row
-              *ngIf="skoolRegisterForm.controls.skool.errors?.required&&skoolRegisterForm.controls.skool.touched"
+              *ngIf="skoolRegisterForm.controls.name.errors?.required&&skoolRegisterForm.controls.name.touched"
               color="danger">It is required to enter the School Name</ion-row>
           </ion-col>
         </ion-row>

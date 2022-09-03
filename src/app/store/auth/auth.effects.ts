@@ -1,6 +1,6 @@
 import { IUser } from './../../models/user';
 import { AppState } from './../app.store';
-import { createAccount, signInUser, storeUser, logoutUser } from './auth.actions';
+import { createAccount, signInUser, storeUser, logoutUser, userSigned } from './auth.actions';
 import { AuthService } from './../../services/auth.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -19,7 +19,7 @@ export class AuthEffects {
   ) {}
 
   signupEffect = createEffect(() => {
-    let userObj;
+    let userObj:IUser;
     return this.actions$.pipe(
       ofType(createAccount),
       switchMap((payload) => {
@@ -38,7 +38,7 @@ export class AuthEffects {
             mergeMap((result: any) => {
               return [
                 storeUser({ user: userObj }),
-                redirectTo({ page: '/admin-menu' })
+                userSigned({uid:userObj.uid})
               ];
             })
           );
@@ -47,20 +47,21 @@ export class AuthEffects {
   });
 
   signInEffect = createEffect(()=>{
+    let uid;
     return this.actions$.pipe(
       ofType(signInUser),
       switchMap((payload)=>{
         return this.authService.signInUser(payload.mail,payload.password)
         .pipe(
           switchMap((result)=>{
-            const uid = result.user.uid;
+            uid = result.user.uid;
             return this.authService.getUserByUid(uid);
           }),
           mergeMap((userResult:IUser)=>{
             const user = new User(userResult);
             return [
               storeUser({user:user}),
-              redirectTo({page:'/admin-menu'})
+              userSigned({uid})
             ]
           })
         )

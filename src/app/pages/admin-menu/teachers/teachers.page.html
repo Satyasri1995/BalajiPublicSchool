@@ -19,24 +19,37 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <ion-row class="ion-justify-content-center fill">
+  <ion-row class="ion-justify-content-center fill" *ngIf="teachers.length">
     <ion-col sizeSm="12" sizeMd="4" class="ion-no-padding">
       <ion-list>
-        <ion-item class="ion-no-padding ion-activatable ripple-parent" detail="true" (click)="viewTeacherData()">
+        <ion-item *ngFor="let teacher of teachers" class="ion-no-padding ion-activatable ripple-parent" detail="true" (click)="viewTeacherData(teacher)">
           <ion-ripple-effect type="unbounded"></ion-ripple-effect>
           <div class="list_item">
-            <div class="list_item_title">Teacher Name</div>
+            <div class="list_item_title">{{teacher.name}}</div>
             <ion-row class="list_item_subtitle ion-align-items-center">
               <span>Class Teacher : </span> &nbsp;
-              <span>None</span>
+              <span>{{teacher.class}}</span>
             </ion-row>
             <ion-row class="list_item_subtitle ion-align-items-center">
-              <span>Subject Taught : </span> &nbsp;
-              <span>English,Hindi</span>
+              <span>Subjects : </span> &nbsp;
+              <span>{{teacher.subjects.join(",")}}</span>
             </ion-row>
           </div>
         </ion-item>
       </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-align-items-center fill" *ngIf="!teachers.length">
+    <ion-col sizeSm="12" sizeMd="4">
+      <ion-row  class="ion-justify-content-center ion-align-items-center">
+        <ion-label>No teachers Found</ion-label>
+      </ion-row>
+      <ion-row  class="ion-justify-content-center ion-align-items-center">
+        <ion-button fill="outline" size="small" (click)="addTeacher()">
+          <ion-icon name="person-add-outline" slot="start"></ion-icon>
+          <ion-label>Add Teacher</ion-label>
+        </ion-button>
+      </ion-row>
     </ion-col>
   </ion-row>
 </ion-content>

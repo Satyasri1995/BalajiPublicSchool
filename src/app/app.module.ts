@@ -1,3 +1,4 @@
+import { RegisterEffects } from './store/register/register.effects';
 import { UIEffects } from './store/ui/ui.effects';
 import { AuthEffects } from './store/auth/auth.effects';
 import { AppReducer } from './store/app.store';
@@ -32,7 +33,7 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
     AngularFirestoreModule,
     AngularFireAuthModule,
     StoreModule.forRoot(AppReducer),
-    EffectsModule.forRoot([AuthEffects, UIEffects]),
+    EffectsModule.forRoot([AuthEffects, UIEffects,RegisterEffects]),
   ],
   providers: [
     {

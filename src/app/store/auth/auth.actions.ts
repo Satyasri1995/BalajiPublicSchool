@@ -13,12 +13,12 @@ export const signInUser = createAction(
 
 export const storeUser = createAction(
   '[user] save the auth object',
-  props<{ user:IUser }>()
+  props<{ user: IUser }>()
 );
 
-export const logoutUser = createAction(
-  '[user] user logout'
-)
+export const logoutUser = createAction('[user] user logout');
 
-
-
+export const userSigned = createAction(
+  '[user] marking user as signed',
+  props<{ uid: string }>()
+);

@@ -1,21 +1,30 @@
+import { ITeacher, Teacher } from './../../models/teacher';
+import { EditTeacherSelector } from './../../store/teacher/teacher.selector';
+import { map } from 'rxjs/operators';
+import { AppState } from './../../store/app.store';
+import { Subscription } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-add-teacher',
   templateUrl: './add-teacher.component.html',
   styleUrls: ['./add-teacher.component.scss'],
 })
-export class AddTeacherComponent implements OnInit {
+export class AddTeacherComponent implements OnInit,OnDestroy {
   @Input() mode = 'add';
+  editTeacher:ITeacher;
   teacherForm: FormGroup;
   classOptions: any;
   subjectOptions: any;
   sectionOptions: any;
+  editSub:Subscription;
   constructor(
     private readonly fb: FormBuilder,
-    private readonly modal: ModalController
+    private readonly modal: ModalController,
+    private readonly store:Store<AppState>
   ) {
     this.classOptions = [
       { label: 'None', value: 'None' },
@@ -79,6 +88,17 @@ export class AddTeacherComponent implements OnInit {
     this.teacherForm.valueChanges.subscribe((value) =>
       this.classValidation(value)
     );
+    this.editSub = this.store.pipe(map((state)=>EditTeacherSelector(state))).subscribe((teacher:ITeacher)=>{
+      this.editTeacher=teacher.id?teacher:new Teacher();
+      this.teacherForm.setValue({
+        name:teacher.name,
+        mail:teacher.mail,
+        class:teacher.class,
+        section:teacher.section,
+        subjects:teacher.subjects,
+        phone:teacher.phone
+      })
+    })
   }
 
   classValidation(value) {
@@ -107,5 +127,9 @@ export class AddTeacherComponent implements OnInit {
   onSubmit() {
     console.log(this.mode);
     this.cancel();
+  }
+
+  ngOnDestroy(): void {
+      this.editSub?.unsubscribe();
   }
 }

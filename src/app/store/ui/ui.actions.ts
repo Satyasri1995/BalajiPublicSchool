@@ -5,6 +5,8 @@ export const redirectTo = createAction(
   props<{ page: string }>()
 );
 
-
+export const dismissModal = createAction(
+  '[modal] dismisses the current modal'
+)
 
 

@@ -1,7 +1,7 @@
 import { IUser } from './../models/user';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { collectionData, docData } from '@angular/fire/firestore';
+import {  docData } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { addDoc, collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';

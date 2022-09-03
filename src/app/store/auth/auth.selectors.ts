@@ -9,8 +9,5 @@ export const UserSelector = createSelector(
   (state: AuthState) => state.user
 );
 
-export const AuthObjectSelector = createSelector(
-  AuthSelector,
-  (state: AuthState) => state.auth
-);
+
 
