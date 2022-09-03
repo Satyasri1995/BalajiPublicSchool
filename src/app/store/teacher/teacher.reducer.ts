@@ -1,4 +1,4 @@
-import { setTeachers, setEditTeachers } from './teacher.action';
+import { setTeachers, setEditTeachers, clearTeacher } from './teacher.action';
 import { createReducer, on } from '@ngrx/store';
 import { Teacher } from 'src/app/models/teacher';
 
@@ -20,5 +20,11 @@ export const TeacherReducer = createReducer(
       ...state,
       editTeacher:payload.teacher
     }
-  })
+  }),
+  on(clearTeacher,(state)=>{
+    return {
+      ...state,
+      editTeacher:new Teacher()
+    }
+  }),
 )

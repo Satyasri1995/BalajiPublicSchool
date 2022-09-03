@@ -5,8 +5,9 @@ export const redirectTo = createAction(
   props<{ page: string }>()
 );
 
-export const dismissModal = createAction(
-  '[modal] dismisses the current modal'
-)
+export const dismissModal = createAction('[modal] dismisses the current modal');
 
-
+export const toggleLoading = createAction(
+  '[loading] toggle loading',
+  props<{ loading: boolean }>()
+);

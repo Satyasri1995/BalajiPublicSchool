@@ -1,16 +1,17 @@
-import { tap } from 'rxjs/operators';
+import { tap, switchMap, catchError } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { redirectTo, dismissModal } from './ui.actions';
-import {  ModalController } from '@ionic/angular';
+import { redirectTo, dismissModal, toggleLoading } from './ui.actions';
+import { LoadingController, ModalController } from '@ionic/angular';
 
 @Injectable()
 export class UIEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly router: Router,
-    private readonly modal: ModalController
+    private readonly modal: ModalController,
+    private readonly loading: LoadingController
   ) {}
 
   redirect = createEffect(
@@ -24,6 +25,26 @@ export class UIEffects {
     },
     { dispatch: false }
   );
+
+  loadingEffect = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(toggleLoading),
+      tap(async (payload) => {
+        if (payload.loading) {
+          const loadElem = await this.loading.create({
+            message:'Loading please wait...',
+            spinner:'bubbles',
+          });
+          loadElem.present();
+        } else {
+          const loader = await this.loading.getTop();
+          if(loader){
+            await loader.dismiss();
+          }
+        }
+      }),
+    );
+  },{dispatch:false});
 
   dismissModal = createEffect(
     () => {

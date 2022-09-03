@@ -1,4 +1,4 @@
-import { redirectTo } from './../ui/ui.actions';
+import { redirectTo, toggleLoading } from './../ui/ui.actions';
 import { ISkool, Skool } from './../../models/skool';
 import { RegisterService } from './../../services/register.service';
 import { switchMap, mergeMap } from 'rxjs/operators';
@@ -22,7 +22,8 @@ export class RegisterEffects{
               if(register.id){
                 return [
                   storeRegister({skool:new Skool(register)}),
-                  redirectTo({page:'/admin-menu'})
+                  redirectTo({page:'/admin-menu'}),
+                  toggleLoading({loading:false})
                 ];
               }
               return [

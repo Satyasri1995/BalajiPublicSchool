@@ -1,3 +1,4 @@
+import { toggleLoading } from './../../store/ui/ui.actions';
 
 import { createAccount, signInUser } from './../../store/auth/auth.actions';
 import { Component, OnInit } from '@angular/core';
@@ -16,6 +17,7 @@ export class AuthPage implements OnInit {
   isSignIn: boolean;
   loginForm: FormGroup;
   signupForm: FormGroup;
+  loading:boolean=false;
   constructor(
     private readonly router: Router,
     private readonly fb: FormBuilder,
@@ -96,12 +98,16 @@ export class AuthPage implements OnInit {
   }
 
   doSignIn() {
+    this.loading=true;
     const { mail, password } = this.loginForm.value;
+    this.store.dispatch(toggleLoading({loading:true}));
     this.store.dispatch(signInUser({mail,password}));
   }
 
   doSignup() {
+    this.loading=true;
     const { mail, password } = this.signupForm.value;
+    this.store.dispatch(toggleLoading({loading:true}));
     this.store.dispatch(createAccount({ mail, password }));
   }
 }

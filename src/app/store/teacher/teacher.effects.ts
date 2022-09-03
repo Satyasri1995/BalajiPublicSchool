@@ -1,4 +1,4 @@
-import { dismissModal, redirectTo } from './../ui/ui.actions';
+import { dismissModal, redirectTo, toggleLoading } from './../ui/ui.actions';
 import { ITeacher } from './../../models/teacher';
 import { switchMap, mergeMap } from 'rxjs/operators';
 import { TeacherService } from './../../services/teacher.service';
@@ -9,6 +9,8 @@ import {
   setTeachers,
   addTeacher,
   setEditTeachers,
+  clearTeacher,
+  updateTeacher,
 } from './teacher.action';
 
 @Injectable()
@@ -24,7 +26,7 @@ export class TeacherEffects {
       switchMap((payload) => {
         return this.teacherService.getTeachers(payload.id).pipe(
           mergeMap((teachers: ITeacher[]) => {
-            return [setTeachers({ teachers })];
+            return [setTeachers({ teachers }),toggleLoading({loading:false})];
           })
         );
       })
@@ -37,7 +39,20 @@ export class TeacherEffects {
       switchMap((payload) => {
         return this.teacherService.addTeacher(payload.teacher, payload.id).pipe(
           mergeMap((__result) => {
-            return [getTeachers({ id: payload.id }), dismissModal()];
+            return [getTeachers({ id: payload.id }), dismissModal(),clearTeacher()];
+          })
+        );
+      })
+    );
+  });
+
+  updateTeacher = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateTeacher),
+      switchMap((payload) => {
+        return this.teacherService.updateTeacher(payload.teacher, payload.id,payload.tid).pipe(
+          mergeMap((__result) => {
+            return [getTeachers({ id: payload.id }), dismissModal(),redirectTo({page:'/admin-menu/teachers'})];
           })
         );
       })

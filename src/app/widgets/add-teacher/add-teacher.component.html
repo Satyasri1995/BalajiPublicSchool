@@ -36,7 +36,7 @@
         </ion-row>
         <ion-item>
           <ion-label position="floating">Phone</ion-label>
-          <ion-input formControlName="mail" type="text"></ion-input>
+          <ion-input formControlName="phone" type="text"></ion-input>
         </ion-item>
         <ion-row class="error-message">
           <ion-col>
@@ -81,8 +81,8 @@
               color="danger">It is required to select a Subject</ion-row>
           </ion-col>
         </ion-row>
-        <ion-button class="ion-margin" fill="outline" type="submit">
-          <ion-label>Add</ion-label>
+        <ion-button [disabled]="!teacherForm.valid" class="ion-margin" fill="outline" type="submit">
+          <ion-label>{{this.editTeacher.id?'UPDATE':'ADD'}}</ion-label>
         </ion-button>
       </form>
     </ion-col>

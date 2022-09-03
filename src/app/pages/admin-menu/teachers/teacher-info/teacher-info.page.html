@@ -14,22 +14,22 @@
         </ion-card-header>
         <ion-card-content>
           <div class="list_item">
-            <div class="list_item_title">Teacher Name</div>
+            <div class="list_item_title">{{selectedTeacher.name}}</div>
             <ion-row class="list_item_subtitle ion-align-items-center">
               <span>Class Teacher : </span> &nbsp;
-              <span> None</span>
+              <span> {{selectedTeacher.class}}</span>
             </ion-row>
             <ion-row class="list_item_subtitle ion-align-items-center">
               <span>Phone : </span> &nbsp;
-              <span>9492349001</span>
+              <span>{{selectedTeacher.phone}}</span>
             </ion-row>
             <ion-row class="list_item_subtitle ion-align-items-center">
               <span>Mail : </span> &nbsp;
-              <span>venkatasatya.davuloori@gmail.com</span>
+              <span>{{selectedTeacher.mail}}</span>
             </ion-row>
             <ion-row class="list_item_subtitle ion-align-items-center">
-              <span>Subject Taught : </span> &nbsp;
-              <span>English</span>
+              <span>Subjects : </span> &nbsp;
+              <span>{{selectedTeacher.subjects.join(",")}}</span>
             </ion-row>
           </div>
           <ion-row class="ion-justify-content-end">

@@ -1,4 +1,5 @@
-import { setEditTeachers } from './../../../store/teacher/teacher.action';
+import { RegisterIdSelector } from './../../../store/register/register.selector';
+import { setEditTeachers, getTeachers } from './../../../store/teacher/teacher.action';
 import { ITeacher } from './../../../models/teacher';
 import { AppState } from 'src/app/store/app.store';
 import { Subscription } from 'rxjs';
@@ -19,6 +20,7 @@ import { map } from 'rxjs/operators';
 export class TeachersPage implements OnInit,OnDestroy {
   teacherSub:Subscription;
   teachers:ITeacher[];
+
   constructor(
     private readonly modal: ModalController,
     private readonly store:Store<AppState>
@@ -27,7 +29,7 @@ export class TeachersPage implements OnInit,OnDestroy {
   ngOnInit() {
     this.teacherSub = this.store.pipe(map((state)=>TeacherSelector(state))).subscribe((result)=>{
       this.teachers=result.teachers;
-    })
+    });
   }
 
   async addTeacher() {
@@ -52,5 +54,6 @@ export class TeachersPage implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
       this.teacherSub?.unsubscribe();
+
   }
 }

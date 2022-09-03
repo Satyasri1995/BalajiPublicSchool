@@ -22,15 +22,15 @@ export class Teacher{
   subjects:string[];
   createdAt:Date;
   updatedAt:Date;
-  constructor(data?:ITeacher){
-    this.id=data?.id;
-    this.name=data?.name;
-    this.mail=data?.mail;
-    this.phone=data?.phone;
-    this.class=data?.class;
-    this.section=data?.section;
-    this.subjects=data?.subjects;
-    this.createdAt=data?.createdAt;
-    this.updatedAt=data?.updatedAt;
+   constructor(data?:ITeacher){
+    this.id=data?.id || '';
+    this.name=data?.name || '';
+    this.mail=data?.mail || '';
+    this.phone=data?.phone || 0;
+    this.class=data?.class || '';
+    this.section=data?.section || '';
+    this.subjects=data?.subjects || [];
+    this.createdAt=data?.createdAt || null;
+    this.updatedAt=data?.updatedAt || null;
   }
 }

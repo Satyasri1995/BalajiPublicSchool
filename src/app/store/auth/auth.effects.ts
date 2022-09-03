@@ -1,3 +1,4 @@
+import { toggleLoading } from './../ui/ui.actions';
 import { IUser } from './../../models/user';
 import { AppState } from './../app.store';
 import { createAccount, signInUser, storeUser, logoutUser, userSigned } from './auth.actions';
@@ -38,7 +39,8 @@ export class AuthEffects {
             mergeMap((result: any) => {
               return [
                 storeUser({ user: userObj }),
-                userSigned({uid:userObj.uid})
+                userSigned({uid:userObj.uid}),
+                toggleLoading({loading:false})
               ];
             })
           );
@@ -61,7 +63,8 @@ export class AuthEffects {
             const user = new User(userResult);
             return [
               storeUser({user:user}),
-              userSigned({uid})
+              userSigned({uid}),
+              toggleLoading({loading:false})
             ]
           })
         )
@@ -79,6 +82,7 @@ export class AuthEffects {
             return [
               storeUser({user:new User()}),
               redirectTo({page:'/auth'}),
+              toggleLoading({loading:false})
             ]
           })
         )

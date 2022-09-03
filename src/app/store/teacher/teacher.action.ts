@@ -20,3 +20,12 @@ export const setEditTeachers = createAction(
   '[teacher] set teacher for edit',
   props<{ teacher: ITeacher }>()
 );
+
+export const updateTeacher = createAction(
+  '[teacher] update teacher',
+  props<{ teacher: ITeacher; id: string; tid: string }>()
+);
+
+export const clearTeacher = createAction('[teacher] clear the edit teacher');
+
+

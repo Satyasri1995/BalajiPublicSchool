@@ -1,3 +1,4 @@
+import { TeacherEffects } from './store/teacher/teacher.effects';
 import { RegisterEffects } from './store/register/register.effects';
 import { UIEffects } from './store/ui/ui.effects';
 import { AuthEffects } from './store/auth/auth.effects';
@@ -33,7 +34,7 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
     AngularFirestoreModule,
     AngularFireAuthModule,
     StoreModule.forRoot(AppReducer),
-    EffectsModule.forRoot([AuthEffects, UIEffects,RegisterEffects]),
+    EffectsModule.forRoot([AuthEffects, UIEffects,RegisterEffects,TeacherEffects]),
   ],
   providers: [
     {

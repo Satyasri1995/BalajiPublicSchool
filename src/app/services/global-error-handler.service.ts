@@ -15,6 +15,14 @@ export class GlobalErrorHandlerService implements ErrorHandler {
           buttons: ['ok'],
         });
         toast.present();
+      }else if(code==='auth/network-request-failed'){
+        const toast = await this.toast.create({
+          header: 'AUTH FAILED',
+          message: 'Error such as timeout, interrupted connection or unreachable host occured',
+          color: 'danger',
+          buttons: ['ok'],
+        });
+        toast.present();
       }else{
         console.log(error)
       }

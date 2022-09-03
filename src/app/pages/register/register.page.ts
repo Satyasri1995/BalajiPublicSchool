@@ -1,3 +1,4 @@
+import { toggleLoading } from './../../store/ui/ui.actions';
 import { IUser } from './../../models/user';
 import { UserSelector } from './../../store/auth/auth.selectors';
 import { Subscription } from 'rxjs';
@@ -49,6 +50,7 @@ export class RegisterPage implements OnInit,OnDestroy {
     skool.uid=this.user.uid;
     skool.createdAt=new Date();
     skool.updatedAt=new Date();
+    this.store.dispatch(toggleLoading({loading:true}));
     this.store.dispatch(createRegister({ skool }));
   }
 }
