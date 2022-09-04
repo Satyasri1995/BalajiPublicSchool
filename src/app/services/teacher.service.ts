@@ -1,3 +1,4 @@
+import { ISchedule } from './../models/schedule';
 import { ITeacher, Teacher } from './../models/teacher';
 import { map } from 'rxjs/operators';
 import { collection, getDocs, addDoc, updateDoc, doc } from 'firebase/firestore';
@@ -46,5 +47,29 @@ export class TeacherService {
     return from(updateDoc(ref,teacherObj));
   }
 
+  addSchedule(rid:string,tid:string,schedule:ISchedule){
+    const ref = collection(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedule`);
+    const scheduleObj = this.createNewObject(schedule);
+    return from(addDoc(ref,scheduleObj));
+  }
+
+  getSchedule(rid:string,tid:string){
+    const ref = collection(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedule`);
+    return from(getDocs(ref)).pipe(
+      map((snapshot)=>{
+        return snapshot.docs.map((doc)=>{
+          const schedule:any = doc.data();
+          const id=doc.id;
+          return {id,...schedule};
+        })
+      })
+    )
+  }
+
+  updateSchedule(rid:string,tid:string,sid:string,schedule:ISchedule){
+    const ref = doc(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedule/${sid}`);
+    const scheduleObj = this.createNewObject(schedule);
+    return from(updateDoc(ref,scheduleObj));
+  }
 
 }

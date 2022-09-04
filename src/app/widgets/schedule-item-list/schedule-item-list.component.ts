@@ -11,24 +11,11 @@ import { ActionSheetController, ModalController } from '@ionic/angular';
 })
 export class ScheduleItemListComponent implements OnInit {
   @Input() mode: string;
-  mySchedule;
+  @Input() schedule;
   constructor(
     private readonly modal: ModalController,
     private readonly actionSheet: ActionSheetController
-  ) {
-    this.mySchedule = [
-      new Schedule({
-        id: Math.random().toString(),
-        period: 1,
-        day: 1,
-        class: '7th Class',
-        subject: 'English',
-        section: 'A',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }),
-    ];
-  }
+  ) {}
 
   ngOnInit() {}
 

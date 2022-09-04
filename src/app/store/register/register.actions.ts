@@ -10,3 +10,6 @@ export const createRegister = createAction(
   '[register] creates a new register',
   props<{ skool: ISkool }>()
 );
+
+
+

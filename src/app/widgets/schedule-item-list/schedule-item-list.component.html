@@ -1,16 +1,16 @@
 <ion-list>
-  <ion-item [style.marginLeft]="mode==='edit'?'16px':'0px'" class="list_item ion-no-margin ion-no-padding ion-activatable ripple-parent" *ngFor="let schedule of mySchedule;let i=index" (click)="doActionSheet(schedule)">
+  <ion-item  class="list_item ion-no-margin ion-no-padding ion-activatable ripple-parent" *ngFor="let sch of schedule;let i=index" (click)="doActionSheet(schedule)">
     <ion-ripple-effect type="unbounded"></ion-ripple-effect>
     <div class="flex-column">
-      <div class="list_item_title">{{schedule.period}}<sup>{{schedule.period|rank}}</sup></div>
+      <div class="list_item_title">{{sch.period}}<sup>{{sch.period|rank}}</sup></div>
       <div class="list_item_subtitle">Period</div>
     </div>
     <div class="flex-column flex">
-      <div class="list_item_title">{{schedule.subject}}</div>
-      <div class="list_item_subtitle">{{schedule.class}}</div>
+      <div class="list_item_title">{{sch.subject}}</div>
+      <div class="list_item_subtitle">{{sch.class}}</div>
     </div>
     <div class="flex-column">
-      <div class="list_item_title">{{schedule.section}}</div>
+      <div class="list_item_title">{{sch.section}}</div>
       <div class="list_item_subtitle">Section</div>
     </div>
   </ion-item>

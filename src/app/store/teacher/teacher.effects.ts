@@ -1,3 +1,4 @@
+import { ISchedule } from './../../models/schedule';
 import { dismissModal, redirectTo, toggleLoading } from './../ui/ui.actions';
 import { ITeacher } from './../../models/teacher';
 import { switchMap, mergeMap } from 'rxjs/operators';
@@ -11,6 +12,10 @@ import {
   setEditTeachers,
   clearTeacher,
   updateTeacher,
+  getSchedule,
+  storeSchedules,
+  addSchedule,
+  updateSchedule,
 } from './teacher.action';
 
 @Injectable()
@@ -26,7 +31,10 @@ export class TeacherEffects {
       switchMap((payload) => {
         return this.teacherService.getTeachers(payload.id).pipe(
           mergeMap((teachers: ITeacher[]) => {
-            return [setTeachers({ teachers }),toggleLoading({loading:false})];
+            return [
+              setTeachers({ teachers }),
+              toggleLoading({ loading: false }),
+            ];
           })
         );
       })
@@ -39,7 +47,11 @@ export class TeacherEffects {
       switchMap((payload) => {
         return this.teacherService.addTeacher(payload.teacher, payload.id).pipe(
           mergeMap((__result) => {
-            return [getTeachers({ id: payload.id }), dismissModal(),clearTeacher()];
+            return [
+              getTeachers({ id: payload.id }),
+              dismissModal(),
+              clearTeacher(),
+            ];
           })
         );
       })
@@ -50,11 +62,17 @@ export class TeacherEffects {
     return this.actions$.pipe(
       ofType(updateTeacher),
       switchMap((payload) => {
-        return this.teacherService.updateTeacher(payload.teacher, payload.id,payload.tid).pipe(
-          mergeMap((__result) => {
-            return [getTeachers({ id: payload.id }), dismissModal(),redirectTo({page:'/admin-menu/teachers'})];
-          })
-        );
+        return this.teacherService
+          .updateTeacher(payload.teacher, payload.id, payload.tid)
+          .pipe(
+            mergeMap((__result) => {
+              return [
+                getTeachers({ id: payload.id }),
+                dismissModal(),
+                redirectTo({ page: '/admin-menu/teachers' }),
+              ];
+            })
+          );
       })
     );
   });
@@ -67,4 +85,52 @@ export class TeacherEffects {
       })
     );
   });
+
+  getSchedule = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(getSchedule),
+      switchMap((payload) => {
+        return this.teacherService.getSchedule(payload.rid, payload.tid).pipe(
+          mergeMap((schedules) => {
+            return [
+              storeSchedules({ schedules: schedules }),
+              toggleLoading({ loading: false }),
+            ];
+          })
+        );
+      })
+    );
+  });
+
+  addSchedule = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(addSchedule),
+      switchMap((payload) => {
+        return this.teacherService
+          .addSchedule(payload.rid, payload.tid, payload.schedule)
+          .pipe(
+            mergeMap((__) => {
+              return [getSchedule({ rid: payload.rid, tid: payload.tid })];
+            })
+          );
+      })
+    );
+  });
+
+  updateSchedule = createEffect(()=>{
+    return this.actions$.pipe(
+      ofType(updateSchedule),
+      switchMap((payload)=>{
+        return this.teacherService.updateSchedule(payload.rid,payload.tid,payload.sid,payload.schedule)
+        .pipe(
+          mergeMap(()=>{
+            return [
+              getSchedule({ rid: payload.rid, tid: payload.tid }),
+            ]
+          })
+        )
+      })
+    )
+  })
+
 }

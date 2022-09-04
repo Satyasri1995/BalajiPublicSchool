@@ -1,5 +1,6 @@
 import { ITeacher } from './../../models/teacher';
 import { createAction, props } from '@ngrx/store';
+import { ISchedule } from 'src/app/models/schedule';
 
 export const getTeachers = createAction(
   '[teacher] get all the teacher',
@@ -28,4 +29,22 @@ export const updateTeacher = createAction(
 
 export const clearTeacher = createAction('[teacher] clear the edit teacher');
 
+export const addSchedule = createAction(
+  '[schedule] creates schedule',
+  props<{rid:string,tid:string;schedule:ISchedule}>()
+)
 
+export const getSchedule = createAction(
+  '[schedule] get all schedules',
+  props<{rid:string,tid:string}>()
+)
+
+export const storeSchedules = createAction(
+  '[schedule] store all schedules',
+  props<{schedules:ISchedule[]}>()
+)
+
+export const updateSchedule = createAction(
+  '[schedule] update the scheule',
+  props<{rid:string,tid:string,sid:string,schedule:ISchedule}>()
+)
