@@ -37,10 +37,12 @@ export class UIEffects {
           });
           loadElem.present();
         } else {
-          const loader = await this.loading.getTop();
-          if(loader){
-            await loader.dismiss();
-          }
+          setTimeout(async()=>{
+            const loader = await this.loading.getTop();
+            if(loader){
+              await loader.dismiss();
+            }
+          },1000)
         }
       }),
     );

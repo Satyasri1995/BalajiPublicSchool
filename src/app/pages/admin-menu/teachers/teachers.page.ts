@@ -1,10 +1,10 @@
 import { RegisterIdSelector } from './../../../store/register/register.selector';
-import { setEditTeachers, getTeachers } from './../../../store/teacher/teacher.action';
+import { setEditTeachers, getTeachers, getSchedule } from './../../../store/teacher/teacher.action';
 import { ITeacher } from './../../../models/teacher';
 import { AppState } from 'src/app/store/app.store';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { RemoveTeacherComponent } from './../../../widgets/remove-teacher/remove-teacher.component';
+import { RemoveTeacherComponent } from '../../../widgets/remove-teacher/remove-teacher.component';
 import { AddTeacherComponent } from './../../../widgets/add-teacher/add-teacher.component';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -20,6 +20,8 @@ import { map } from 'rxjs/operators';
 export class TeachersPage implements OnInit,OnDestroy {
   teacherSub:Subscription;
   teachers:ITeacher[];
+  regId:string;
+  regSub:Subscription;
 
   constructor(
     private readonly modal: ModalController,
@@ -30,6 +32,9 @@ export class TeachersPage implements OnInit,OnDestroy {
     this.teacherSub = this.store.pipe(map((state)=>TeacherSelector(state))).subscribe((result)=>{
       this.teachers=result.teachers;
     });
+    this.regSub=this.store.pipe(map(state=>RegisterIdSelector(state))).subscribe((id)=>{
+      this.regId=id;
+    })
   }
 
   async addTeacher() {
@@ -41,7 +46,7 @@ export class TeachersPage implements OnInit,OnDestroy {
 
   viewTeacherData(teacher:ITeacher) {
     this.store.dispatch(setEditTeachers({teacher}));
-    // this.router.navigate(['/admin-menu/teachers/teacher-info']);
+    this.store.dispatch(getSchedule({rid:this.regId,tid:teacher.id}));
   }
 
   async removeTeacher() {

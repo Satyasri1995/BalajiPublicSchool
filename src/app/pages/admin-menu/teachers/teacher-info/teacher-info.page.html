@@ -51,7 +51,7 @@
                 <ion-label>Monday</ion-label>
               </ion-item>
               <div class="ion-no-padding" slot="content">
-                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+                <app-schedule-item-list [schedules]="mondaySchedule" mode="edit"></app-schedule-item-list>
               </div>
             </ion-accordion>
             <ion-accordion [value]="2">
@@ -59,7 +59,7 @@
                 <ion-label>Tuesday</ion-label>
               </ion-item>
               <div class="ion-no-padding" slot="content">
-                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+                <app-schedule-item-list [rid]="regId" [tid]="selectedTeacher.id" [schedules]="tuesdaySchesdule" mode="edit"></app-schedule-item-list>
               </div>
             </ion-accordion>
             <ion-accordion [value]="3">
@@ -67,7 +67,7 @@
                 <ion-label>Wednsday</ion-label>
               </ion-item>
               <div class="ion-no-padding" slot="content">
-                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+                <app-schedule-item-list [rid]="regId" [tid]="selectedTeacher.id" [schedules]="wednesDaySchedule" mode="edit"></app-schedule-item-list>
               </div>
             </ion-accordion>
             <ion-accordion [value]="4">
@@ -75,7 +75,7 @@
                 <ion-label>Thursday</ion-label>
               </ion-item>
               <div class="ion-no-padding" slot="content">
-                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+                <app-schedule-item-list [rid]="regId" [tid]="selectedTeacher.id" [schedules]="thursdaySchedule" mode="edit"></app-schedule-item-list>
               </div>
             </ion-accordion>
             <ion-accordion [value]="5">
@@ -83,7 +83,7 @@
                 <ion-label>Friday</ion-label>
               </ion-item>
               <div class="ion-no-padding" slot="content">
-                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+                <app-schedule-item-list [rid]="regId" [tid]="selectedTeacher.id" [schedules]="fridaySchedule" mode="edit"></app-schedule-item-list>
               </div>
             </ion-accordion>
             <ion-accordion [value]="6">
@@ -91,7 +91,7 @@
                 <ion-label>Saturday</ion-label>
               </ion-item>
               <div class="ion-no-padding" slot="content">
-                <app-schedule-item-list mode="edit"></app-schedule-item-list>
+                <app-schedule-item-list [rid]="regId" [tid]="selectedTeacher.id" [schedules]="fridaySchedule" mode="edit"></app-schedule-item-list>
               </div>
             </ion-accordion>
           </ion-accordion-group>

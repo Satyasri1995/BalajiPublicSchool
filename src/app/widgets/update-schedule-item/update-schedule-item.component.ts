@@ -1,22 +1,39 @@
+import { toggleLoading } from './../../store/ui/ui.actions';
+import { updateSchedule, addSchedule } from './../../store/teacher/teacher.action';
+import { ISchedule, Schedule } from './../../models/schedule';
+import { EditScheduleSelector } from './../../store/teacher/teacher.selector';
+import {  map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { AppState } from './../../store/app.store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-update-schedule-item',
   templateUrl: './update-schedule-item.component.html',
   styleUrls: ['./update-schedule-item.component.scss'],
 })
-export class UpdateScheduleItemComponent implements OnInit {
+export class UpdateScheduleItemComponent implements OnInit, OnDestroy {
   classOptions;
   subjectOptions;
   periodOptions;
   sectionOptions;
   dayOptions;
   scheduleForm: FormGroup;
+  selSchSub: Subscription;
+  editSchedule:{
+    rid:string,
+    tid:string,
+    sid:string,
+    schedule:ISchedule
+  };
+  selectedSchedule: ISchedule;
   constructor(
     private readonly modal: ModalController,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly store: Store<AppState>
   ) {
     this.classOptions = [
       { label: 'Leisure', value: 'NA' },
@@ -85,38 +102,55 @@ export class UpdateScheduleItemComponent implements OnInit {
       period: [undefined, [Validators.required]],
       subject: [undefined, [Validators.required]],
     });
-    this.scheduleForm.valueChanges.subscribe((formValue) => this.leisureValidation(formValue));
+    this.scheduleForm.valueChanges.subscribe((formValue) =>
+      this.leisureValidation(formValue)
+    );
+    this.selSchSub = this.store
+      .pipe(map((state) => EditScheduleSelector(state)))
+      .subscribe((editSchedule) => {
+        this.selectedSchedule = editSchedule.schedule;
+        this.editSchedule=editSchedule;
+        this.applytoForm()
+      });
   }
 
-  leisureValidation(formValue){
+  applytoForm(){
+    this.scheduleForm.setValue({
+      day:this.selectedSchedule.day,
+      class:this.selectedSchedule.class,
+      section:this.selectedSchedule.section,
+      period:this.selectedSchedule.period,
+      subject:this.selectedSchedule.subject
+    })
+  }
+
+  leisureValidation(formValue) {
     if (
       formValue.class === 'NA' &&
       formValue.section !== 'NA' &&
-      formValue.period !== 0 &&
       formValue.subject !== 'NA'
     ) {
-      this.subjectOptions.unshift({label:'NA',value:'NA'});
-      this.periodOptions.unshift({label:'NA',value:0});
-      this.sectionOptions.unshift({label:'NA',value:'NA'});
+      this.subjectOptions.unshift({ label: 'NA', value: 'NA' });
+      this.sectionOptions.unshift({ label: 'NA', value: 'NA' });
       this.scheduleForm.setValue({
         ...formValue,
         section: 'NA',
-        period: 0,
         subject: 'NA',
       });
-    }else if (
+    } else if (
       formValue.class !== 'NA' &&
       formValue.section === 'NA' &&
-      formValue.period === 0 &&
       formValue.subject === 'NA'
-    ){
-      this.subjectOptions=this.subjectOptions.filter(item=>item.value!=='NA');
-      this.periodOptions=this.periodOptions.filter(item=>item.value!==0);
-      this.sectionOptions=this.sectionOptions.filter(item=>item.value!=='NA');
+    ) {
+      this.subjectOptions = this.subjectOptions.filter(
+        (item) => item.value !== 'NA'
+      );
+      this.sectionOptions = this.sectionOptions.filter(
+        (item) => item.value !== 'NA'
+      );
       this.scheduleForm.setValue({
         ...formValue,
         section: null,
-        period: null,
         subject: null,
       });
     }
@@ -127,7 +161,29 @@ export class UpdateScheduleItemComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.scheduleForm);
+    const schedule = new Schedule(this.scheduleForm.value);
+    this.store.dispatch(toggleLoading({loading:true}));
+    if(this.selectedSchedule.id){
+      schedule.updatedAt=new Date();
+      this.store.dispatch(updateSchedule({
+        rid:this.editSchedule.rid,
+        tid:this.editSchedule.tid,
+        sid:this.editSchedule.sid,
+        schedule:schedule
+      }));
+    }else{
+      schedule.createdAt=new Date();
+      schedule.updatedAt=new Date();
+      this.store.dispatch(addSchedule({
+        rid:this.editSchedule.rid,
+        tid:this.editSchedule.tid,
+        schedule:schedule
+      }));
+    }
     this.doDismissModal();
+  }
+
+  ngOnDestroy(): void {
+    this.selSchSub?.unsubscribe();
   }
 }

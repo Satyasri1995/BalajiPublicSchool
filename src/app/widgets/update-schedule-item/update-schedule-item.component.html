@@ -51,7 +51,7 @@
         </ion-row>
         <ion-item>
           <ion-label position="floating">Period</ion-label>
-          <ion-select [disabled]="class.value==='NA'" formControlName="period" placeholder="Select Period">
+          <ion-select  formControlName="period" placeholder="Select Period">
             <ion-select-option *ngFor="let period of periodOptions" [value]="period.value">{{period.value}}<sup>{{period.value|rank}}</sup> Period</ion-select-option>
           </ion-select>
         </ion-item>
@@ -63,7 +63,7 @@
         </ion-row>
         <ion-item>
           <ion-label position="floating">Subject</ion-label>
-          <ion-select [disabled]="class.value==='NA'" formControlName="subject" placeholder="Select Subject">
+          <ion-select  [disabled]="class.value==='NA'" formControlName="subject" placeholder="Select Subject">
             <ion-select-option *ngFor="let subject of subjectOptions" [value]="subject.value">{{subject.label}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -73,8 +73,8 @@
               color="danger">It is required to select Subject</ion-row>
           </ion-col>
         </ion-row>
-        <ion-button class="ion-margin-top" fill="outline" color="primary">
-          <ion-label>Save</ion-label>
+        <ion-button type="submit" [disabled]="!scheduleForm.valid" class="ion-margin-top" fill="outline" color="primary">
+          <ion-label>{{selectedSchedule.id?'Update':'Add'}}</ion-label>
         </ion-button>
       </form>
     </ion-col>

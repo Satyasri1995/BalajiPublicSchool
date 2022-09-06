@@ -15,7 +15,7 @@ export class TeacherService {
   createNewObject(data: any) {
     const dataObj = {};
     for (let property in data) {
-      if (data[property]) {
+      if (data[property]||data[property]===0) {
         dataObj[property] = data[property];
       }
     }
@@ -48,13 +48,13 @@ export class TeacherService {
   }
 
   addSchedule(rid:string,tid:string,schedule:ISchedule){
-    const ref = collection(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedule`);
+    const ref = collection(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedules`);
     const scheduleObj = this.createNewObject(schedule);
     return from(addDoc(ref,scheduleObj));
   }
 
   getSchedule(rid:string,tid:string){
-    const ref = collection(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedule`);
+    const ref = collection(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedules`);
     return from(getDocs(ref)).pipe(
       map((snapshot)=>{
         return snapshot.docs.map((doc)=>{
@@ -67,7 +67,7 @@ export class TeacherService {
   }
 
   updateSchedule(rid:string,tid:string,sid:string,schedule:ISchedule){
-    const ref = doc(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedule/${sid}`);
+    const ref = doc(this.fire.firestore,`skools/${rid}/teachers/${tid}/schedules/${sid}`);
     const scheduleObj = this.createNewObject(schedule);
     return from(updateDoc(ref,scheduleObj));
   }

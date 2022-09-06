@@ -16,6 +16,7 @@ import {
   storeSchedules,
   addSchedule,
   updateSchedule,
+  clearEditSchedule,
 } from './teacher.action';
 
 @Injectable()
@@ -126,6 +127,7 @@ export class TeacherEffects {
           mergeMap(()=>{
             return [
               getSchedule({ rid: payload.rid, tid: payload.tid }),
+              clearEditSchedule()
             ]
           })
         )

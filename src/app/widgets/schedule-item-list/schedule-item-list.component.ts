@@ -1,8 +1,11 @@
+import { editSchedule } from './../../store/teacher/teacher.action';
+import { AppState } from 'src/app/store/app.store';
 import { UpdateScheduleItemComponent } from './../update-schedule-item/update-schedule-item.component';
 import { ISchedule } from './../../models/schedule';
 import { Component, Input, OnInit } from '@angular/core';
 import { Schedule } from 'src/app/models/schedule';
 import { ActionSheetController, ModalController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-schedule-item-list',
@@ -11,26 +14,37 @@ import { ActionSheetController, ModalController } from '@ionic/angular';
 })
 export class ScheduleItemListComponent implements OnInit {
   @Input() mode: string;
-  @Input() schedule;
+  @Input() schedules:ISchedule[];
+  @Input() rid: string;
+  @Input() tid: string;
   constructor(
     private readonly modal: ModalController,
-    private readonly actionSheet: ActionSheetController
+    private readonly actionSheet: ActionSheetController,
+    private readonly store: Store<AppState>
   ) {}
 
   ngOnInit() {}
 
-  doEditSchedule(schedule) {
-    if(this.mode!=='edit'){
+  doEditSchedule(schedule:ISchedule) {
+    if (this.mode !== 'edit') {
       return;
     }
+    this.store.dispatch(
+      editSchedule({
+        rid: this.rid,
+        tid: this.tid,
+        sid: schedule?.id||"",
+        schedule: schedule||new Schedule(),
+      })
+    );
     this.modal
-      .create({ component: UpdateScheduleItemComponent })
+      .create({
+        component: UpdateScheduleItemComponent,
+        componentProps: { mode: 'edit' },
+      })
       .then((modalEle) => {
         modalEle.present();
         return modalEle.onDidDismiss();
-      })
-      .then((result) => {
-        console.log(result.role);
       });
   }
 
@@ -39,32 +53,32 @@ export class ScheduleItemListComponent implements OnInit {
   }
 
   doActionSheet(schedule: ISchedule) {
-    if(this.mode!=='edit'){
+    if (this.mode !== 'edit') {
       return;
     }
-   const actionSheet = this.actionSheet.create({
-      header:'Choose your action',
-      buttons:[
+    const actionSheet = this.actionSheet.create({
+      header: 'Choose your action',
+      buttons: [
         {
-          text:'Edit Schedule',
-          role:'edit',
-          icon:'create-outline',
-          handler:()=>this.doEditSchedule(schedule)
+          text: 'Edit Schedule',
+          role: 'edit',
+          icon: 'create-outline',
+          handler: () => this.doEditSchedule(schedule),
         },
         {
-          text:'Delete Schedule',
-          role:'delete',
-          icon:'trash-outline',
-          handler:()=>this.doEditSchedule(schedule)
+          text: 'Delete Schedule',
+          role: 'delete',
+          icon: 'trash-outline',
+          handler: () => this.doEditSchedule(schedule),
         },
         {
-          text:'Cancel',
-          role:'cancel',
-          icon:'close'
-        }
-      ]
+          text: 'Cancel',
+          role: 'cancel',
+          icon: 'close',
+        },
+      ],
     });
-    actionSheet.then((actionSheetEle)=>{
+    actionSheet.then((actionSheetEle) => {
       actionSheetEle.present();
     });
   }

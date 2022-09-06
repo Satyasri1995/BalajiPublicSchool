@@ -1,5 +1,5 @@
 import { RankPipe } from './../../../pipes/rank.pipe';
-import { RemoveTeacherComponent } from './../../../widgets/remove-teacher/remove-teacher.component';
+import { RemoveTeacherComponent } from '../../../widgets/remove-teacher/remove-teacher.component';
 import { AddTeacherComponent } from './../../../widgets/add-teacher/add-teacher.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

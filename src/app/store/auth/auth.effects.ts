@@ -81,8 +81,8 @@ export class AuthEffects {
           mergeMap(()=>{
             return [
               storeUser({user:new User()}),
+              toggleLoading({loading:false}),
               redirectTo({page:'/auth'}),
-              toggleLoading({loading:false})
             ]
           })
         )

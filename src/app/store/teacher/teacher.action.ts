@@ -31,20 +31,27 @@ export const clearTeacher = createAction('[teacher] clear the edit teacher');
 
 export const addSchedule = createAction(
   '[schedule] creates schedule',
-  props<{rid:string,tid:string;schedule:ISchedule}>()
-)
+  props<{ rid: string; tid: string; schedule: ISchedule }>()
+);
 
 export const getSchedule = createAction(
   '[schedule] get all schedules',
-  props<{rid:string,tid:string}>()
-)
+  props<{ rid: string; tid: string }>()
+);
 
 export const storeSchedules = createAction(
   '[schedule] store all schedules',
-  props<{schedules:ISchedule[]}>()
-)
+  props<{ schedules: ISchedule[] }>()
+);
 
 export const updateSchedule = createAction(
   '[schedule] update the scheule',
-  props<{rid:string,tid:string,sid:string,schedule:ISchedule}>()
-)
+  props<{ rid: string; tid: string; sid: string; schedule: ISchedule }>()
+);
+
+export const editSchedule = createAction(
+  '[schedule] edit schedule',
+  props<{ rid: string; tid: string; sid: string; schedule: ISchedule }>()
+);
+
+export const clearEditSchedule = createAction('[schedule] clear edit schedule');
