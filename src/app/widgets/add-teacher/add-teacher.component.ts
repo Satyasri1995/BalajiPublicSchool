@@ -29,7 +29,7 @@ export class AddTeacherComponent implements OnInit, OnDestroy {
   regId: string;
   editSub: Subscription;
   regIdSub: Subscription;
-  updated:boolean=false;
+  updated: boolean = false;
   constructor(
     private readonly fb: FormBuilder,
     private readonly modal: ModalController,
@@ -79,7 +79,14 @@ export class AddTeacherComponent implements OnInit, OnDestroy {
     ];
     this.teacherForm = this.fb.group({
       name: [undefined, [Validators.required]],
-      mail: [undefined, [Validators.required, Validators.email]],
+      mail: [
+        undefined,
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+        ],
+      ],
       class: [undefined, [Validators.required]],
       section: [undefined, [Validators.required]],
       subjects: [[], [Validators.required]],
@@ -139,9 +146,9 @@ export class AddTeacherComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (!this.editTeacher.id) {
-      const teacher =  new Teacher(this.teacherForm.value);
-      teacher.createdAt=new Date();
-      teacher.updatedAt=new Date();
+      const teacher = new Teacher(this.teacherForm.value);
+      teacher.createdAt = new Date();
+      teacher.updatedAt = new Date();
       this.store.dispatch(
         addTeacher({
           teacher: new Teacher(this.teacherForm.value),
@@ -150,8 +157,8 @@ export class AddTeacherComponent implements OnInit, OnDestroy {
       );
     } else {
       const teacher = new Teacher(this.teacherForm.value);
-      teacher.createdAt=this.editTeacher.createdAt;
-      teacher.updatedAt=new Date();
+      teacher.createdAt = this.editTeacher.createdAt;
+      teacher.updatedAt = new Date();
       delete teacher.id;
       this.store.dispatch(
         updateTeacher({
@@ -161,11 +168,11 @@ export class AddTeacherComponent implements OnInit, OnDestroy {
         })
       );
     }
-    this.store.dispatch(toggleLoading({loading:true}));
+    this.store.dispatch(toggleLoading({ loading: true }));
   }
 
   ngOnDestroy(): void {
-    this.editSub?.unsubscribe();
-    this.regIdSub?.unsubscribe();
+    this.editSub.unsubscribe();
+    this.regIdSub.unsubscribe();
   }
 }

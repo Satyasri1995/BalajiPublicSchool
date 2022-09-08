@@ -14,9 +14,10 @@ import { Store } from '@ngrx/store';
 })
 export class ScheduleItemListComponent implements OnInit {
   @Input() mode: string;
-  @Input() schedules:ISchedule[];
+  @Input() schedules: ISchedule[];
   @Input() rid: string;
   @Input() tid: string;
+  @Input() day: number;
   constructor(
     private readonly modal: ModalController,
     private readonly actionSheet: ActionSheetController,
@@ -25,16 +26,20 @@ export class ScheduleItemListComponent implements OnInit {
 
   ngOnInit() {}
 
-  doEditSchedule(schedule:ISchedule) {
+  doEditSchedule(schedule: ISchedule) {
     if (this.mode !== 'edit') {
       return;
+    }
+    schedule = schedule?schedule:new Schedule();
+    if (!schedule.id) {
+      schedule.day = this.day;
     }
     this.store.dispatch(
       editSchedule({
         rid: this.rid,
         tid: this.tid,
-        sid: schedule?.id||"",
-        schedule: schedule||new Schedule(),
+        sid: schedule.id || '',
+        schedule: schedule || schedule,
       })
     );
     this.modal

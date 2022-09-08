@@ -1,7 +1,14 @@
 import { toggleLoading } from './../ui/ui.actions';
 import { IUser } from './../../models/user';
 import { AppState } from './../app.store';
-import { createAccount, signInUser, storeUser, logoutUser, userSigned } from './auth.actions';
+import {
+  createAccount,
+  signInUser,
+  storeUser,
+  logoutUser,
+  userSigned,
+  restoreSession,
+} from './auth.actions';
 import { AuthService } from './../../services/auth.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -10,17 +17,15 @@ import { User } from 'src/app/models/user';
 import { redirectTo } from '../ui/ui.actions';
 import { Store } from '@ngrx/store';
 
-
 @Injectable()
 export class AuthEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly authService: AuthService,
-    private readonly store: Store<AppState>
   ) {}
 
   signupEffect = createEffect(() => {
-    let userObj:IUser;
+    let userObj: IUser;
     return this.actions$.pipe(
       ofType(createAccount),
       switchMap((payload) => {
@@ -39,8 +44,8 @@ export class AuthEffects {
             mergeMap((result: any) => {
               return [
                 storeUser({ user: userObj }),
-                userSigned({uid:userObj.uid}),
-                toggleLoading({loading:false})
+                userSigned({ uid: userObj.uid }),
+                toggleLoading({ loading: false }),
               ];
             })
           );
@@ -48,45 +53,63 @@ export class AuthEffects {
     );
   });
 
-  signInEffect = createEffect(()=>{
+  restoreSession = createEffect(() => {
+    let uid: string;
+    return this.actions$.pipe(
+      ofType(restoreSession),
+      switchMap((payload) => {
+        uid = payload.uid;
+        return this.authService.getUserByUid(payload.uid);
+      }),
+      mergeMap((userResult: IUser) => {
+        const user = new User(userResult);
+        return [
+          storeUser({ user: user }),
+          userSigned({ uid }),
+          toggleLoading({ loading: false }),
+        ];
+      })
+    );
+  });
+
+  signInEffect = createEffect(() => {
     let uid;
     return this.actions$.pipe(
       ofType(signInUser),
-      switchMap((payload)=>{
-        return this.authService.signInUser(payload.mail,payload.password)
-        .pipe(
-          switchMap((result)=>{
+      switchMap((payload) => {
+        return this.authService.signInUser(payload.mail, payload.password).pipe(
+          switchMap((result) => {
             uid = result.user.uid;
+            this.authService.saveUserData(payload.mail, payload.password);
             return this.authService.getUserByUid(uid);
           }),
-          mergeMap((userResult:IUser)=>{
+          mergeMap((userResult: IUser) => {
             const user = new User(userResult);
             return [
-              storeUser({user:user}),
-              userSigned({uid}),
-              toggleLoading({loading:false})
-            ]
+              storeUser({ user: user }),
+              userSigned({ uid }),
+              toggleLoading({ loading: false }),
+            ];
           })
-        )
+        );
       })
-    )
+    );
   });
 
-  logoutEffect = createEffect(()=>{
+  logoutEffect = createEffect(() => {
     return this.actions$.pipe(
       ofType(logoutUser),
-      switchMap(()=>{
-        return this.authService.logout()
-        .pipe(
-          mergeMap(()=>{
+      switchMap(() => {
+        return this.authService.logout().pipe(
+          mergeMap(() => {
             return [
-              storeUser({user:new User()}),
-              toggleLoading({loading:false}),
-              redirectTo({page:'/auth'}),
-            ]
+              storeUser({ user: new User() }),
+              toggleLoading({ loading: false }),
+              redirectTo({ page: '/auth' }),
+            ];
           })
-        )
+        );
       })
-    )
-  })
+    );
+  });
 }

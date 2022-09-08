@@ -1,5 +1,9 @@
 import { RegisterIdSelector } from './../../../store/register/register.selector';
-import { setEditTeachers, getTeachers, getSchedule } from './../../../store/teacher/teacher.action';
+import {
+  setEditTeachers,
+  getTeachers,
+  getSchedule,
+} from './../../../store/teacher/teacher.action';
 import { ITeacher } from './../../../models/teacher';
 import { AppState } from 'src/app/store/app.store';
 import { Subscription } from 'rxjs';
@@ -17,24 +21,28 @@ import { map } from 'rxjs/operators';
   templateUrl: './teachers.page.html',
   styleUrls: ['./teachers.page.scss'],
 })
-export class TeachersPage implements OnInit,OnDestroy {
-  teacherSub:Subscription;
-  teachers:ITeacher[];
-  regId:string;
-  regSub:Subscription;
+export class TeachersPage implements OnInit, OnDestroy {
+  teacherSub: Subscription;
+  teachers: ITeacher[];
+  regId: string;
+  regSub: Subscription;
 
   constructor(
     private readonly modal: ModalController,
-    private readonly store:Store<AppState>
+    private readonly store: Store<AppState>
   ) {}
 
   ngOnInit() {
-    this.teacherSub = this.store.pipe(map((state)=>TeacherSelector(state))).subscribe((result)=>{
-      this.teachers=result.teachers;
-    });
-    this.regSub=this.store.pipe(map(state=>RegisterIdSelector(state))).subscribe((id)=>{
-      this.regId=id;
-    })
+    this.teacherSub = this.store
+      .pipe(map((state) => TeacherSelector(state)))
+      .subscribe((result) => {
+        this.teachers = result.teachers;
+      });
+    this.regSub = this.store
+      .pipe(map((state) => RegisterIdSelector(state)))
+      .subscribe((id) => {
+        this.regId = id;
+      });
   }
 
   async addTeacher() {
@@ -44,9 +52,9 @@ export class TeachersPage implements OnInit,OnDestroy {
     modal.present();
   }
 
-  viewTeacherData(teacher:ITeacher) {
-    this.store.dispatch(setEditTeachers({teacher}));
-    this.store.dispatch(getSchedule({rid:this.regId,tid:teacher.id}));
+  viewTeacherData(teacher: ITeacher) {
+    this.store.dispatch(setEditTeachers({ teacher }));
+    this.store.dispatch(getSchedule({ rid: this.regId, tid: teacher.id }));
   }
 
   async removeTeacher() {
@@ -58,7 +66,6 @@ export class TeachersPage implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.teacherSub?.unsubscribe();
-
+    this.teacherSub.unsubscribe();
   }
 }

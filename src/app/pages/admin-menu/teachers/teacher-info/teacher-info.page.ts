@@ -24,14 +24,20 @@ export class TeacherInfoPage implements OnInit, OnDestroy {
   teacherSub: Subscription;
   schedules: ISchedule[] = [];
   schedulesSub: Subscription;
-  regSub:Subscription;
+  regSub: Subscription;
   mondaySchedule: ISchedule[];
   tuesdaySchesdule: ISchedule[];
   wednesDaySchedule: ISchedule[];
   thursdaySchedule: ISchedule[];
   fridaySchedule: ISchedule[];
   saturdaySchedule: ISchedule[];
-  regId:string;
+  mondayLeisures: number[];
+  tuesdayLeisures: number[];
+  wednesdayLeisures: number[];
+  thursdayLeisures: number[];
+  fridayLeisures: number[];
+  saturdayLeisures: number[];
+  regId: string;
   constructor(
     private readonly modal: ModalController,
     private readonly store: Store<AppState>
@@ -48,27 +54,35 @@ export class TeacherInfoPage implements OnInit, OnDestroy {
       .subscribe((schedules: ISchedule[]) => {
         this.schedules = schedules;
         this.mondaySchedule = this.schedules.filter(
-          (schedule) => schedule.day == 1
+          (schedule) => schedule.day === 1
         );
+        this.mondayLeisures = this.mondaySchedule.filter((sch)=>sch.class==='NA').map((sch)=>sch.period);
         this.tuesdaySchesdule = this.schedules.filter(
-          (schedule) => schedule.day == 2
+          (schedule) => schedule.day === 2
         );
+        this.tuesdayLeisures = this.tuesdaySchesdule.filter((sch)=>sch.class==='NA').map((sch)=>sch.period);
         this.wednesDaySchedule = this.schedules.filter(
-          (schedule) => schedule.day == 3
+          (schedule) => schedule.day === 3
         );
+        this.wednesdayLeisures = this.wednesDaySchedule.filter((sch)=>sch.class==='NA').map((sch)=>sch.period);
         this.thursdaySchedule = this.schedules.filter(
           (schedule) => schedule.day === 4
         );
+        this.thursdayLeisures = this.thursdaySchedule.filter((sch)=>sch.class==='NA').map((sch)=>sch.period);
         this.fridaySchedule = this.schedules.filter(
           (schedule) => schedule.day === 5
         );
+        this.fridayLeisures = this.fridaySchedule.filter((sch)=>sch.class==='NA').map((sch)=>sch.period);
         this.saturdaySchedule = this.schedules.filter(
           (schedule) => schedule.day === 6
         );
+        this.saturdayLeisures = this.saturdaySchedule.filter((sch)=>sch.class==='NA').map((sch)=>sch.period);
       });
-      this.regSub = this.store.pipe(map((state)=>RegisterIdSelector(state))).subscribe((id)=>{
-        this.regId=id;
-      })
+    this.regSub = this.store
+      .pipe(map((state) => RegisterIdSelector(state)))
+      .subscribe((id) => {
+        this.regId = id;
+      });
   }
 
   ionViewDidEnter() {
@@ -88,8 +102,8 @@ export class TeacherInfoPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.teacherSub?.unsubscribe();
-    this.schedulesSub?.unsubscribe();
-    this.regSub?.unsubscribe();
+    this.teacherSub.unsubscribe();
+    this.schedulesSub.unsubscribe();
+    this.regSub.unsubscribe();
   }
 }

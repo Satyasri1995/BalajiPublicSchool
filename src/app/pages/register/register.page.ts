@@ -28,11 +28,11 @@ export class RegisterPage implements OnInit,OnDestroy {
 
   ngOnInit() {
     this.skoolRegisterForm = this.fb.group({
-      name: ['Balaji Public School', [Validators.required]],
-      branch: ['Butchirajupalem', [Validators.required]],
-      regCode: ['1389073', [Validators.required]],
-      postalCode: ['530027', [Validators.required]],
-      address: ['Some Fake Adddress', [Validators.required]],
+      name: ['', [Validators.required]],
+      branch: ['', [Validators.required]],
+      regCode: ['', [Validators.required]],
+      postalCode: ['', [Validators.required]],
+      address: ['', [Validators.required]],
     });
     this.userSub = this.store
       .pipe(map((state) => UserSelector(state)))
@@ -42,7 +42,7 @@ export class RegisterPage implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.userSub?.unsubscribe();
+      this.userSub.unsubscribe();
   }
 
   onSubmit() {

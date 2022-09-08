@@ -22,3 +22,8 @@ export const userSigned = createAction(
   '[user] marking user as signed',
   props<{ uid: string }>()
 );
+
+export const restoreSession = createAction(
+  '[user] restore user session',
+  props<{uid:string}>()
+)

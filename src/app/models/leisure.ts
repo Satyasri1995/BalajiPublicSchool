@@ -14,11 +14,19 @@ export class Leisure {
   schedules: ISchedule[];
   createdAt: Date;
   updatedAt: Date;
-  constructor(data?: ILeisure) {
-    this.id = data?.id;
-    this.name = data?.name;
-    this.schedules = data?.schedules;
-    this.createdAt = data?.createdAt;
-    this.updatedAt = data?.updatedAt;
+  constructor(
+    data: ILeisure = {
+      id: '',
+      name: '',
+      schedules: [],
+      createdAt: undefined,
+      updatedAt: undefined,
+    }
+  ) {
+    this.id = data.id;
+    this.name = data.name;
+    this.schedules = data.schedules || [];
+    this.createdAt = data.createdAt || undefined;
+    this.updatedAt = data.updatedAt || undefined;
   }
 }

@@ -1,11 +1,25 @@
+import { restoreSession } from './../store/auth/auth.actions';
+import { redirectTo } from './../store/ui/ui.actions';
 import { IUser } from './../models/user';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {  docData } from '@angular/fire/firestore';
+import { docData } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
+import { Preferences as pref } from '@capacitor/preferences';
+import { AppState } from '../store/app.store';
+import { Store } from '@ngrx/store';
+import { signInUser } from '../store/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +28,37 @@ export class AuthService {
   authUser: any;
   constructor(
     private readonly auth: AngularFireAuth,
-    private readonly fire: AngularFirestore
+    private readonly fire: AngularFirestore,
+    private readonly store:Store<AppState>
   ) {}
+
+  getUserData(){
+    return pref.get({key:"user"});
+  }
+
+  async saveUserData(mail:string,password:string){
+    await pref.set({
+      key:'user',
+      value:JSON.stringify({mail,password})
+    })
+  }
+
+  async autoLogin(){
+    const {value} = await this.getUserData();
+    const user:{mail:string,password:string} = value?JSON.parse(value):{};
+    if(user.mail){
+      this.store.dispatch(signInUser({mail:user.mail,password:user.password}));
+    }else{
+      this.store.dispatch(redirectTo({page:'/auth'}))
+    }
+  }
 
   createAccount(mail: string, password: string) {
     return from(this.auth.createUserWithEmailAndPassword(mail, password));
   }
 
-  signInUser(mail:string,password:string){
-    return from(this.auth.signInWithEmailAndPassword(mail,password));
+  signInUser(mail: string, password: string) {
+    return from(this.auth.signInWithEmailAndPassword(mail, password));
   }
 
   createNewObject(data: any) {
@@ -32,11 +68,15 @@ export class AuthService {
         dataObj[property] = data[property];
       }
     }
-    return dataObj
+    return dataObj;
   }
 
-  logout(){
-    return from(this.auth.signOut());
+  logout() {
+    return from(pref.clear()).pipe(
+      switchMap((_)=>{
+        return from(this.auth.signOut());
+      })
+    )
   }
 
   addUser(user: IUser) {
@@ -45,16 +85,16 @@ export class AuthService {
     return from(addDoc(ref, data));
   }
 
-  getUserByUid(id:string){
+  getUserByUid(id: string) {
     const ref = collection(this.fire.firestore, `users`);
-    const q = query(ref,where('uid','==',id));
+    const q = query(ref, where('uid', '==', id));
     return from(getDocs(q)).pipe(
-      map((data)=>{
+      map((data) => {
         const doc = data.docs.shift();
         return {
-          id:doc.id,
-          ...doc.data()
-        }
+          id: doc.id,
+          ...doc.data(),
+        };
       })
     );
   }

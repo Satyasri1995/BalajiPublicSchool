@@ -1,8 +1,10 @@
+import { toggleLoading } from './../store/ui/ui.actions';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
 @Injectable()
 export class GlobalErrorHandlerService implements ErrorHandler {
-  constructor(private readonly toast: ToastController) {}
+  constructor(private readonly toast: ToastController,private readonly store:Store) {}
   async handleError(error: any): Promise<void> {
     const code = error.code;
     const message = error.message;
@@ -26,5 +28,6 @@ export class GlobalErrorHandlerService implements ErrorHandler {
       }else{
         console.log(error)
       }
+      this.store.dispatch(toggleLoading({loading:false}))
   }
 }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DigiSkool</string>
+    <string name="title_activity_main">DigiSkool</string>
+    <string name="package_name">dvs.satyaapps.digiskool</string>
+    <string name="custom_url_scheme">dvs.satyaapps.digiskool</string>
+</resources>

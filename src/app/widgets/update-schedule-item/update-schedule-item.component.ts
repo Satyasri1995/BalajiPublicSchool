@@ -23,11 +23,11 @@ export class UpdateScheduleItemComponent implements OnInit, OnDestroy {
   dayOptions;
   scheduleForm: FormGroup;
   selSchSub: Subscription;
-  editSchedule:{
-    rid:string,
-    tid:string,
-    sid:string,
-    schedule:ISchedule
+  editSchedule: {
+    rid: string;
+    tid: string;
+    sid: string;
+    schedule: ISchedule;
   };
   selectedSchedule: ISchedule;
   constructor(
@@ -96,7 +96,7 @@ export class UpdateScheduleItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.scheduleForm = this.fb.group({
-      day: [new Date().getDay(), [Validators.required]],
+      day: [undefined, [Validators.required]],
       class: [undefined, [Validators.required]],
       section: [undefined, [Validators.required]],
       period: [undefined, [Validators.required]],
@@ -110,18 +110,18 @@ export class UpdateScheduleItemComponent implements OnInit, OnDestroy {
       .subscribe((editSchedule) => {
         this.selectedSchedule = editSchedule.schedule;
         this.editSchedule=editSchedule;
-        this.applytoForm()
+        this.applytoForm();
       });
   }
 
   applytoForm(){
     this.scheduleForm.setValue({
-      day:this.selectedSchedule.day,
-      class:this.selectedSchedule.class,
-      section:this.selectedSchedule.section,
-      period:this.selectedSchedule.period,
-      subject:this.selectedSchedule.subject
-    })
+      day:this.selectedSchedule.day||'',
+      class:this.selectedSchedule.class||'',
+      section:this.selectedSchedule.section||'',
+      period:this.selectedSchedule.period||'',
+      subject:this.selectedSchedule.subject||''
+    });
   }
 
   leisureValidation(formValue) {
@@ -169,7 +169,7 @@ export class UpdateScheduleItemComponent implements OnInit, OnDestroy {
         rid:this.editSchedule.rid,
         tid:this.editSchedule.tid,
         sid:this.editSchedule.sid,
-        schedule:schedule
+        schedule
       }));
     }else{
       schedule.createdAt=new Date();
@@ -177,13 +177,13 @@ export class UpdateScheduleItemComponent implements OnInit, OnDestroy {
       this.store.dispatch(addSchedule({
         rid:this.editSchedule.rid,
         tid:this.editSchedule.tid,
-        schedule:schedule
+        schedule
       }));
     }
     this.doDismissModal();
   }
 
   ngOnDestroy(): void {
-    this.selSchSub?.unsubscribe();
+    this.selSchSub.unsubscribe();
   }
 }

@@ -30,7 +30,7 @@ export class AuthPage implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       mail: [
-        'test@gmail.com',
+        '',
         [
           Validators.required,
           Validators.email,
@@ -38,7 +38,7 @@ export class AuthPage implements OnInit {
         ],
       ],
       password: [
-        'Test@123',
+        '',
         [
           Validators.required,
           Validators.pattern(
