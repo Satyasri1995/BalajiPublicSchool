@@ -1,5 +1,5 @@
 import { TeachersState } from './../states';
-import { createSelector } from '@ngrx/store';
+import { createSelector, createAction } from '@ngrx/store';
 import { AppState } from '../app.store';
 
 export const TeacherSelector = (state: AppState) => state.teachers;
@@ -18,3 +18,8 @@ export const SchedulesSelector = createSelector(
   TeacherSelector,
   (state: TeachersState) => state.schedules
 );
+
+export const AllTeachersSelector = createSelector(
+  TeacherSelector,
+  (state:TeachersState)=>state.teachers
+)

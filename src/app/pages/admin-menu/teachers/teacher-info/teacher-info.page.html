@@ -108,7 +108,7 @@
                 <ion-label>Monday</ion-label>
               </ion-item>
               <div class="ion-no-padding" slot="content">
-                <ion-badge *ngFor="let period of mondayLeisures">{{period}}{{period|rank}} Period</ion-badge>
+                <ion-badge *ngFor="let period of mondayLeisures">{{period}}<sup>{{period|rank}}</sup> Period</ion-badge>
               </div>
             </ion-accordion>
             <ion-accordion [value]="2">

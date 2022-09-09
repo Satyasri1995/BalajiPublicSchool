@@ -17,6 +17,7 @@ import {
   addSchedule,
   updateSchedule,
   clearEditSchedule,
+  removeTeacher,
 } from './teacher.action';
 
 @Injectable()
@@ -58,6 +59,24 @@ export class TeacherEffects {
       })
     );
   });
+
+  deleteTeacher = createEffect(()=>{
+    return this.actions$.pipe(
+      ofType(removeTeacher),
+      switchMap((payload)=>{
+        return this.teacherService.deleteTeacher(payload.rid,payload.tid)
+        .pipe(
+          mergeMap((__result) => {
+            return [
+              getTeachers({ id: payload.rid }),
+              dismissModal(),
+              redirectTo({ page: '/admin-menu/teachers' }),
+            ];
+          })
+        )
+      })
+    )
+  })
 
   updateTeacher = createEffect(() => {
     return this.actions$.pipe(

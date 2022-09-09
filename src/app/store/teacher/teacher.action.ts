@@ -55,3 +55,8 @@ export const editSchedule = createAction(
 );
 
 export const clearEditSchedule = createAction('[schedule] clear edit schedule');
+
+export const removeTeacher = createAction(
+  '[teacher] delete teacher',
+  props<{rid:string,tid:string}>()
+)

@@ -1,7 +1,7 @@
 import { ISchedule } from './../models/schedule';
 import { ITeacher, Teacher } from './../models/teacher';
 import { map } from 'rxjs/operators';
-import { collection, getDocs, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { from, Observable } from 'rxjs';
@@ -39,6 +39,11 @@ export class TeacherService {
     const ref = collection(this.fire.firestore, `skools/${id}/teachers`);
     const teacherObj = this.createNewObject(teacher);
     return from(addDoc(ref,teacherObj));
+  }
+
+  deleteTeacher(rid:string,tid:string){
+    const ref = doc(this.fire.firestore, `skools/${rid}/teachers/${tid}`);
+    return from(deleteDoc(ref));
   }
 
   updateTeacher(teacher:ITeacher,id:string,tid:string){

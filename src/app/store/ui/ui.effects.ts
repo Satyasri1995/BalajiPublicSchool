@@ -1,9 +1,10 @@
-import { tap, switchMap, catchError } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { redirectTo, dismissModal, toggleLoading } from './ui.actions';
+import { redirectTo, dismissModal, toggleLoading, toggleSplashScreen } from './ui.actions';
 import { LoadingController, ModalController } from '@ionic/angular';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Injectable()
 export class UIEffects {
@@ -59,4 +60,17 @@ export class UIEffects {
     },
     { dispatch: false }
   );
+
+  toggleSplash = createEffect(()=>{
+    return this.actions$.pipe(
+      ofType(toggleSplashScreen),
+      tap((payload)=>{
+        if(payload.display){
+          SplashScreen.show();
+        }else{
+          SplashScreen.hide();
+        }
+      })
+    )
+  },{dispatch:false});
 }

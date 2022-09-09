@@ -30,7 +30,9 @@ export class ScheduleItemListComponent implements OnInit {
     if (this.mode !== 'edit') {
       return;
     }
-    schedule = schedule?schedule:new Schedule();
+    if(!schedule){
+      schedule=new Schedule()
+    }
     if (!schedule.id) {
       schedule.day = this.day;
     }

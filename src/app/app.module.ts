@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { TeacherEffects } from './store/teacher/teacher.effects';
 import { RegisterEffects } from './store/register/register.effects';
 import { UIEffects } from './store/ui/ui.effects';
@@ -8,7 +9,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, IonRouterOutlet } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';

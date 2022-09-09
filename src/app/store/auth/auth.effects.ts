@@ -1,6 +1,5 @@
-import { toggleLoading } from './../ui/ui.actions';
+import { toggleLoading, toggleSplashScreen } from './../ui/ui.actions';
 import { IUser } from './../../models/user';
-import { AppState } from './../app.store';
 import {
   createAccount,
   signInUser,
@@ -15,7 +14,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { redirectTo } from '../ui/ui.actions';
-import { Store } from '@ngrx/store';
+
 
 @Injectable()
 export class AuthEffects {
@@ -67,6 +66,7 @@ export class AuthEffects {
           storeUser({ user: user }),
           userSigned({ uid }),
           toggleLoading({ loading: false }),
+          toggleSplashScreen({display:false})
         ];
       })
     );
@@ -89,6 +89,7 @@ export class AuthEffects {
               storeUser({ user: user }),
               userSigned({ uid }),
               toggleLoading({ loading: false }),
+              toggleSplashScreen({display:false})
             ];
           })
         );

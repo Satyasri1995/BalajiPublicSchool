@@ -26,7 +26,7 @@
               color="danger">It is required to select a Teacher</ion-row>
           </ion-col>
         </ion-row>
-        <ion-button type="submit" fill="outline" class="ion-margin">
+        <ion-button [disabled]="!removeForm.valid" type="submit" fill="outline" class="ion-margin">
           <ion-label>Remove</ion-label>
         </ion-button>
       </form>

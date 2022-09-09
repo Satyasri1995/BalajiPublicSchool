@@ -1,5 +1,5 @@
 import { restoreSession } from './../store/auth/auth.actions';
-import { redirectTo } from './../store/ui/ui.actions';
+import { redirectTo, toggleSplashScreen } from './../store/ui/ui.actions';
 import { IUser } from './../models/user';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -45,12 +45,17 @@ export class AuthService {
 
   async autoLogin(){
     const {value} = await this.getUserData();
-    const user:{mail:string,password:string} = value?JSON.parse(value):{};
+    let user:{mail:string,password:string}={mail:'',password:''};
+    if(value){
+      user=JSON.parse(value)
+    }
     if(user.mail){
       this.store.dispatch(signInUser({mail:user.mail,password:user.password}));
     }else{
-      this.store.dispatch(redirectTo({page:'/auth'}))
+      this.store.dispatch(redirectTo({page:'/auth'}));
+      this.store.dispatch(toggleSplashScreen({display:false}));
     }
+
   }
 
   createAccount(mail: string, password: string) {

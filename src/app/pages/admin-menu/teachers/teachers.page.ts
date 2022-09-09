@@ -3,6 +3,7 @@ import {
   setEditTeachers,
   getTeachers,
   getSchedule,
+  clearTeacher,
 } from './../../../store/teacher/teacher.action';
 import { ITeacher } from './../../../models/teacher';
 import { AppState } from 'src/app/store/app.store';
@@ -46,6 +47,7 @@ export class TeachersPage implements OnInit, OnDestroy {
   }
 
   async addTeacher() {
+    this.store.dispatch(clearTeacher())
     const modal = await this.modal.create({
       component: AddTeacherComponent,
     });

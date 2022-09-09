@@ -105,7 +105,10 @@ export class AddTeacherComponent implements OnInit, OnDestroy {
     this.editSub = this.store
       .pipe(map((state) => EditTeacherSelector(state)))
       .subscribe((teacher: ITeacher) => {
-        this.editTeacher = teacher.id ? teacher : new Teacher();
+        this.editTeacher = new Teacher();
+        if(teacher.id){
+          this.editTeacher=teacher;
+        }
         this.teacherForm.setValue({
           name: teacher.name,
           mail: teacher.mail,

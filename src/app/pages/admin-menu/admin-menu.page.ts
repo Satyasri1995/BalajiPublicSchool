@@ -1,6 +1,4 @@
 import { redirectTo, toggleLoading } from './../../store/ui/ui.actions';
-
-
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { logoutUser } from './../../store/auth/auth.actions';
@@ -16,28 +14,31 @@ import { AppState } from 'src/app/store/app.store';
   styleUrls: ['./admin-menu.page.scss'],
 })
 export class AdminMenuPage implements OnInit {
-  regIdSub:Subscription;
-  regId:string;
+  regIdSub: Subscription;
+  regId: string;
 
-  constructor(private readonly store:Store<AppState>) { }
+  constructor(
+    private readonly store: Store<AppState>,
+  ) {}
 
   ngOnInit() {
-    this.regIdSub = this.store.pipe(map((state)=>RegisterIdSelector(state))).subscribe((regId:string)=>{
-      this.regId=regId;
-    })
+    this.regIdSub = this.store
+      .pipe(map((state) => RegisterIdSelector(state)))
+      .subscribe((regId: string) => {
+        this.regId = regId;
+      });
   }
 
-  getTeachers(){
-    if(this.regId){
-      this.store.dispatch(toggleLoading({loading:true}));
-      this.store.dispatch(getTeachers({id:this.regId}));
-      this.store.dispatch(redirectTo({page:'/admin-menu/teachers'}))
+  getTeachers() {
+    if (this.regId) {
+      this.store.dispatch(toggleLoading({ loading: true }));
+      this.store.dispatch(getTeachers({ id: this.regId }));
+      this.store.dispatch(redirectTo({ page: '/admin-menu/teachers' }));
     }
   }
 
-  logout(){
-    this.store.dispatch(toggleLoading({loading:true}));
+  logout() {
+    this.store.dispatch(toggleLoading({ loading: true }));
     this.store.dispatch(logoutUser());
   }
-
 }

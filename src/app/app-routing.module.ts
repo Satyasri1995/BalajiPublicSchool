@@ -28,7 +28,12 @@ const routes: Routes = [
       import('./pages/admin-menu/admin-menu.module').then(
         (m) => m.AdminMenuPageModule
       ),
-  }
+  },
+  {
+    path: '**',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
