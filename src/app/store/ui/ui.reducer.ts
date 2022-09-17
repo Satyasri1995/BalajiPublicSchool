@@ -6,6 +6,7 @@ import { createReducer,on } from '@ngrx/store';
 
 const InitialState = {
   page:"",
+  loading:false
 }
 
 export const UIReducer = createReducer(

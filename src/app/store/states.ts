@@ -5,7 +5,8 @@ import { ISchedule } from '../models/schedule';
 
 
 export interface UIState{
-  page:string
+  page:string,
+  loading:boolean
 }
 
 export interface RegisterState extends ISkool{
